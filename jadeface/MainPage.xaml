@@ -368,6 +368,22 @@
         </phone:PivotItem>
     </phone:Pivot>
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar 
+            IsVisible="True" IsMenuEnabled="True" Opacity="0.5"
+            StateChanged="ApplicationBar_StateChanged">
+            <shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>
+            <shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加书籍" Click="ApplicationBarIconButton_Click_Add"/>
+            <shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>
+            <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click_Setting"/>
+                <shell:ApplicationBarMenuItem Text="检查更新" Click="ApplicationBarMenuItem_Click_Update"/>
+                <shell:ApplicationBarMenuItem Text="关于" Click="ApplicationBarMenuItem_Click_About"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
     <!--
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default" Opacity="1.0" x:Name="AppBar">

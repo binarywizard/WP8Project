@@ -172,6 +172,28 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icon\add.png" />
+    <Content Include="Icon\back.png" />
+    <Content Include="Icon\cancel.png" />
+    <Content Include="Icon\check.png" />
+    <Content Include="Icon\close.png" />
+    <Content Include="Icon\delete.png" />
+    <Content Include="Icon\download.png" />
+    <Content Include="Icon\edit.png" />
+    <Content Include="Icon\feature.alarm.png" />
+    <Content Include="Icon\feature.calendar.png" />
+    <Content Include="Icon\feature.search.png" />
+    <Content Include="Icon\feature.settings.png" />
+    <Content Include="Icon\like.png" />
+    <Content Include="Icon\minus.png" />
+    <Content Include="Icon\next.png" />
+    <Content Include="Icon\overflowdots.png" />
+    <Content Include="Icon\questionmark.png" />
+    <Content Include="Icon\refresh.png" />
+    <Content Include="Icon\save.png" />
+    <Content Include="Icon\share.png" />
+    <Content Include="Icon\stop.png" />
+    <Content Include="Icon\sync.png" />
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="README_FIRST.txt" />
     <Content Include="SplashScreenImage-01.jpg" />
@@ -218,6 +240,7 @@
       <Name>Sqlite</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
