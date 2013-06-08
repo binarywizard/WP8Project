@@ -69,10 +69,12 @@
 			</Setter>
 		</Style>
 	</phone:PhoneApplicationPage.Resources>
+    
+    
     <phone:Pivot HorizontalAlignment="Left" Height="758" Title="Project Jadeface" VerticalAlignment="Top" Width="480" Background="#f6f7eb" Foreground="Black">
         
         <!-- Book List Pivot -->
-        <phone:PivotItem CacheMode="{x:Null}" Header="在读的书" >
+        <phone:PivotItem CacheMode="{x:Null}" Header="书单" Margin="12,0" Height="621" VerticalAlignment="Top" >
             <Grid x:Name="ListLayoutRoot" Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -84,12 +86,13 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*" />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
 
-                    <Button Grid.Row ="0" Grid.ColumnSpan="2" x:Name="ButtonRefresh" Click="ButtonRefresh_Click" Content="刷新我的书籍列表" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}"/>
+                    <!--<Button Grid.Row ="0" Grid.ColumnSpan="2" x:Name="ButtonRefresh" Click="ButtonRefresh_Click" Content="刷新我的书籍列表" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}"/>-->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="0">
+                        <Button x:Name="ButtonReading" Content="正在读" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}" />
+                        <Button x:Name="ButtonWishReading"  Content="想要读" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}" />
+                        <Button x:Name="ButtonFinishReading" Content="已读完" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}" />
+                    </StackPanel>
                     <phone:LongListSelector Grid.Row="1" Grid.ColumnSpan="2" Name="BookListItems">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
@@ -151,7 +154,7 @@
  
         </phone:PivotItem>
 
-        <phone:PivotItem CacheMode="{x:Null}" Header="想读的书" >
+        <phone:PivotItem CacheMode="{x:Null}" Header="读书计划" >
             <Grid x:Name="WishListLayoutRoot" Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -232,7 +235,7 @@
         </phone:PivotItem>
 
 
-        <phone:PivotItem CacheMode="{x:Null}" Header="读完的书" >
+        <phone:PivotItem CacheMode="{x:Null}" Header="读书分析" >
             <Grid x:Name="FinishListLayoutRoot" Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -315,7 +318,7 @@
 
 
         <!-- Book Searching Pivot -->
-        <phone:PivotItem CacheMode="{x:Null}" Header="搜索">
+        <phone:PivotItem CacheMode="{x:Null}" Header="社交">
             <!--LayoutRoot is the root grid where all page content is placed-->
             <Grid x:Name="SearchLayoutRoot" Background="Transparent">
                 <Grid.RowDefinitions>
