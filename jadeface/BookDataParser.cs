@@ -18,10 +18,13 @@ namespace jadeface
             for (int i = 0; i < 5; i++)
             {
                 int PageNo;
+                float Marking;
                 book = new BookListItem();
                 book.Title = (string)json["books"][i]["title"];
                 book.ISBN = (string)json["books"][i]["isbn10"];
                 book.Author = (string)(json["books"][i]["author"].First);
+                float.TryParse((string)json["books"][i]["rating"]["average"], out Marking);
+                book.Marking = Marking;
                 int.TryParse((string)json["books"][i]["pages"], out PageNo);
                 book.PageNo = PageNo;
                 book.CurPageNo = 0;

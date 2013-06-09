@@ -363,6 +363,12 @@ namespace jadeface
 
         private void ApplicationBarIconButton_Click_Refresh(object sender, EventArgs e)
         {
+            List<BookListItem> books = bookService.RefreshBookList(phoneAppServeice.State["username"].ToString());
+            foreach (BookListItem item in books)
+            {
+                Debug.WriteLine("[DEBUG]Item Status is : " + item.Status);
+            }
+            BookListItems.ItemsSource = books;
         }
 
         private void ApplicationBarMenuItem_Click_Setting(object sender, EventArgs e)

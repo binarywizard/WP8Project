@@ -37,6 +37,9 @@ namespace jadeface
         [DataMember(Name = "author")]
         public string Author { get; set; }
 
+        [DataMember(Name = "marking")]
+        public float Marking { get; set; }
+
         [DataMember(Name = "pageno")]
         public int PageNo { get; set; }
 
