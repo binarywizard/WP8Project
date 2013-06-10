@@ -14,6 +14,7 @@ namespace jadeface
     public class BookService
     {
         private IMobileServiceTable<BookListItem> bookListTable = null;
+        private IMobileServiceTable<ReadingRecord> readingRecordsTable = null;
 
         private string dbPath;
 
@@ -215,9 +216,10 @@ namespace jadeface
             {
                 return null;
             }
-            Debug.WriteLine("[DEBUG]Refresh SQL is : " + "select * from readingrecord where userid='" + username + "' and isbn='" + isbn);
-            SQLiteCommand command = dbConn.CreateCommand("select * from readingrecord where userid='" + username + "' and isbn='" + isbn);
+            Debug.WriteLine("[DEBUG]Refresh SQL is : " + "select * from readingrecord where userid='" + username + "' and isbn='" + isbn + "'");
+            SQLiteCommand command = dbConn.CreateCommand("select * from readingrecord where userid='" + username + "' and isbn='" + isbn + "'");
             List<ReadingRecord> records = command.ExecuteQuery<ReadingRecord>();
+            Debug.WriteLine("[DEBUG]records.Count = " + records.Count);
             return records;
         }
         
