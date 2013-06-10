@@ -387,5 +387,11 @@ namespace jadeface
         {
         }
 
+        private void SelectABook(Object sender, SelectionChangedEventArgs e)
+        {
+            var books = (LongListSelector)sender;
+            BookListItem book = books.SelectedItem as BookListItem;
+            NavigationService.Navigate(new Uri("/ReadingRecordPage.xaml?BookISBN=" + book.ISBN, UriKind.Relative));
+        }
     }
 }

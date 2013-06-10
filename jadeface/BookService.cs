@@ -26,6 +26,7 @@ namespace jadeface
             dbPath = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "jadeface.sqlite"));
             dbConn = new SQLiteConnection(dbPath);
             dbConn.CreateTable<BookListItem>();
+            dbConn.CreateTable<ReadingRecord>();
         }
 
         public void destoryInstance()
@@ -175,6 +176,50 @@ namespace jadeface
                     bookListTable.InsertAsync(item);
                 }
             }
+        }
+
+        
+
+        // 读书记录的数据库操作
+
+        public bool insertRecord(ReadingRecord record)
+        {
+            if (record.UserId == null || record.ISBN == null || record.StartPageNo == null || record.EndPageNo == null || record.Timestamp == null || record.UserId.Equals("") 
+                || record.ISBN.Equals("") || record.Timestamp.Equals(""))
+            {
+                return false;
+            }
+
+            if (dbConn.Insert(record) > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool deleteRecord(ReadingRecord record)
+        {
+            if (record.Id.Equals("") || record.Id == null)
+            {
+                return false;
+            }
+            Debug.WriteLine("delete from readingrecord where Id = " + record.Id);
+            SQLiteCommand command = dbConn.CreateCommand("delete from readingrecord where Id = " + record.Id);
+            command.ExecuteQuery<ReadingRecord>();
+            return true;
+        }
+
+        public List<ReadingRecord> RefreshReadingRecord(string username, string isbn)
+        {
+            if (username.Equals("") || username == null || isbn.Equals("") || isbn == null)
+            {
+                return null;
+            }
+            Debug.WriteLine("[DEBUG]Refresh SQL is : " + "select * from readingrecord where userid='" + username + "' and isbn='" + isbn);
+            SQLiteCommand command = dbConn.CreateCommand("select * from readingrecord where userid='" + username + "' and isbn='" + isbn);
+            List<ReadingRecord> records = command.ExecuteQuery<ReadingRecord>();
+            return records;
         }
         
     }

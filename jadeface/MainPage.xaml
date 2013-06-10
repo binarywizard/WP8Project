@@ -69,79 +69,65 @@
 			</Setter>
 		</Style>
 	</phone:PhoneApplicationPage.Resources>
-    
-    
+
+
     <phone:Pivot HorizontalAlignment="Left" Height="758" Title="Project Jadeface" VerticalAlignment="Top" Width="480" Background="#f6f7eb" Foreground="Black">
-        
+
         <!-- Book List Pivot -->
         <phone:PivotItem CacheMode="{x:Null}" Header="读书" Margin="0,12" Height="621" VerticalAlignment="Top">
 
-                    <!--<Grid x:Name="ListContentPanel" Margin="12,0,12,0" Height="566">-->
+            <Grid x:Name="ListContentPanel" Margin="30,0,12,0" Height="566">
 
-                        <!--<Button Grid.Row ="0" Grid.ColumnSpan="2" x:Name="ButtonRefresh" Click="ButtonRefresh_Click" Content="刷新我的书籍列表" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}"/>-->
-                        <phone:LongListSelector Name="BookListItems">
-                            <phone:LongListSelector.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-
-                                        <toolkit:ExpanderView Foreground="Black" FontSize="28" x:Name="expander">
-
-                                            <!-- Expanded Header Start -->
-                                    <toolkit:ExpanderView.Header>
-                                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Background="{x:Null}">
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-                                                <StackPanel Height="126" Width="80" Margin="0, 0">
-                                                    <Image>
-                                                        <Image.Source>
-                                                            <BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="{Binding Image}" />
-                                                        </Image.Source>
-                                                    </Image>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Vertical">
-                                                    <TextBlock Name="BookSearchTitle" Foreground="Black" FontSize="32" Text="{Binding Title}" Margin="10,5"></TextBlock>
-                                                    <TextBlock Name="BookSearchAuthor" Foreground="Black" FontSize="16" Text="{Binding Author}" Margin="10,5" ></TextBlock>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Name="BookSearchMarking" Foreground="Black" FontSize="16" Text="{Binding Marking}" Margin="10,5" ></TextBlock>
-                                                        <!--<TextBlock Name="BookSearchPublisher" Foreground="Black" FontSize="16" Text="{Binding Publisher}" Margin="10,5" ></TextBlock>-->
-                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="180,0,0,0">
-                                                            <TextBlock Text="{Binding CurPageNo}" FontSize="16" ></TextBlock>
-                                                            <TextBlock Text="/" FontSize="16" ></TextBlock >
-                                                            <TextBlock Text="{Binding PageNo}" FontSize="16" ></TextBlock>
-                                                            <TextBlock Text="页" FontSize="16" ></TextBlock>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                </StackPanel>
-                                            </StackPanel>
-                                            <StackPanel VerticalAlignment="Top">
-                                                <ProgressBar Value="{Binding CurPageNo}" Minimum="0" Maximum="{Binding PageNo}" Background="Blue" Foreground="Red" 
-                                                                         VerticalAlignment="Top" Height="20" Width="500" IsIndeterminate="False" />
+                <!--<Button Grid.Row ="0" Grid.ColumnSpan="2" x:Name="ButtonRefresh" Click="ButtonRefresh_Click" Content="刷新我的书籍列表" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}"/>-->
+                <phone:LongListSelector Name="BookListItems" HorizontalContentAlignment="Center" Foreground="Black" SelectionChanged="SelectABook">
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Background="{x:Null}">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Background="#FFEC9F9F" Height="120">
+                                    <StackPanel Height="126" Width="80" Margin="0, 10, 0, 0">
+                                        <Image>
+                                            <Image.Source>
+                                                <BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="{Binding Image}" />
+                                            </Image.Source>
+                                        </Image>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Name="BookSearchTitle" Foreground="Black" FontSize="32" Text="{Binding Title}" Margin="10,5"></TextBlock>
+                                        <TextBlock Name="BookSearchAuthor" Foreground="Black" FontSize="16" Text="{Binding Author}" Margin="10,5" ></TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Name="BookSearchMarking" Foreground="Black" FontSize="16" Text="{Binding Marking}" Margin="10,5" ></TextBlock>
+                                            <!--<TextBlock Name="BookSearchPublisher" Foreground="Black" FontSize="16" Text="{Binding Publisher}" Margin="10,5" ></TextBlock>-->
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="220,0,0,0">
+                                                <TextBlock Text="{Binding CurPageNo}" FontSize="16" HorizontalAlignment="Right"></TextBlock>
+                                                <TextBlock Text="/" FontSize="16" ></TextBlock >
+                                                <TextBlock Text="{Binding PageNo}" FontSize="16" HorizontalAlignment="Left"></TextBlock>
+                                                <TextBlock Text="页" FontSize="16" ></TextBlock>
                                             </StackPanel>
                                         </StackPanel>
-                                    </toolkit:ExpanderView.Header>
-                                    <!-- Expanded Header End -->
-
-                                            <!-- Expanded Items Start -->
-                                            <toolkit:ExpanderView.Items>
-                                                <StackPanel Orientation="Vertical" Background="#CCCC99">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <TextBox Text="{Binding CurPageNo}" Foreground="Black" LostFocus="CurPageSave_LostFocus"></TextBox>
-                                                        <TextBlock Text="页" FontSize="16" VerticalAlignment="Center"></TextBlock>
-                                                        <Button Content="读完了" Foreground="Black" FontSize="16" Click="FinishRead_Click"></Button>
-                                                        <Button Content="详细" Foreground="Black" FontSize="16" Click="BookDetail_Click"></Button>
-                                                    </StackPanel>
-                                                </StackPanel>
-                                            </toolkit:ExpanderView.Items>
-                                            <!-- Expanded Items End -->
-
-                                        </toolkit:ExpanderView>
-
                                     </StackPanel>
-                                </DataTemplate>
-                            </phone:LongListSelector.ItemTemplate>
-                        </phone:LongListSelector>
+                                </StackPanel>
+                                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Background="AliceBlue">
+                                    <ProgressBar Value="{Binding CurPageNo}" Minimum="0" Maximum="{Binding PageNo}" Background="Blue" Foreground="Red" 
+                                                                         Height="10" Width="350" Margin="0,0,0,10"/>
+                                </StackPanel>
+                            </StackPanel>
 
-                    <!--</Grid>-->
-                </phone:PivotItem>
+                            <!--<StackPanel Orientation="Vertical" Background="#CCCC99">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox Text="{Binding CurPageNo}" Foreground="Black" LostFocus="CurPageSave_LostFocus"></TextBox>
+                                            <TextBlock Text="页" FontSize="16" VerticalAlignment="Center"></TextBlock>
+                                            <Button Content="读完了" Foreground="Black" FontSize="16" Click="FinishRead_Click"></Button>
+                                            <Button Content="详细" Foreground="Black" FontSize="16" Click="BookDetail_Click"></Button>
+                                        </StackPanel>
+                                    </StackPanel>-->
+
+
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
+
+            </Grid>
+        </phone:PivotItem>
 
 
         <phone:PivotItem CacheMode="{x:Null}" Header="计划" >
