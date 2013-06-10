@@ -38,7 +38,7 @@
             </Grid.RowDefinitions>
             
             <!--BookPanel contains the title and the author of the book-->
-            <StackPanel Grid.Row="0" Orientation="Vertical">
+            <StackPanel Name="BookInformationPanel" Grid.Row="0" Orientation="Vertical">
                 <TextBlock Text="{Binding Title}" Foreground="Black" Style="{StaticResource PhoneTextTitle2Style}" 
                            HorizontalAlignment="Left" TextWrapping="Wrap" />
                 <TextBlock Text="{Binding Author}" Foreground="Black" Style="{StaticResource PhoneTextTitle3Style}" 
@@ -46,7 +46,7 @@
             </StackPanel>
             
             <!--RecordPanel is used to record pages which user reads in this day-->
-            <StackPanel Grid.Row="1" Orientation="Vertical">
+            <StackPanel Name="ReadingRecordPanel" Grid.Row="1" Orientation="Vertical">
                 <TextBlock Text="今天读了：" Foreground="Black" FontSize="{StaticResource PhoneFontSizeMediumLarge}"
                            VerticalAlignment="Center" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

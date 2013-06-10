@@ -184,8 +184,7 @@ namespace jadeface
 
         public bool insertRecord(ReadingRecord record)
         {
-            if (record.UserId == null || record.ISBN == null || record.StartPageNo == null || record.EndPageNo == null || record.Timestamp == null || record.UserId.Equals("") 
-                || record.ISBN.Equals("") || record.Timestamp.Equals(""))
+            if (record.UserId == null || record.ISBN == null || record.Timestamp == null || record.UserId.Equals("") || record.ISBN.Equals("") || record.Timestamp.Equals(""))
             {
                 return false;
             }
@@ -200,7 +199,7 @@ namespace jadeface
 
         public bool deleteRecord(ReadingRecord record)
         {
-            if (record.Id.Equals("") || record.Id == null)
+            if (record.Id.Equals(""))
             {
                 return false;
             }

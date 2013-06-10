@@ -36,6 +36,7 @@ namespace jadeface
         private BookService bookService;
 
         private BookListItem book;
+        private ReadingRecord record;
         private string currentISBN;
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -54,7 +55,8 @@ namespace jadeface
                 if (books.Count == 1)
                 {
                     book = books.First();
-                    ReadingRecordGrid.DataContext = book;
+                    BookInformationPanel.DataContext = book;
+                    ReadingRecordPanel.DataContext = record;
                 }
                 Debug.WriteLine("[DEBUG]Navigate to ReadingRecordPage...");
                 bookService = BookService.getInstance();
@@ -81,7 +83,7 @@ namespace jadeface
         private void ConfirmRecord_Click(object sender, RoutedEventArgs e)
         {
             Button t = (Button)sender;
-            ReadingRecord record = t.DataContext as ReadingRecord;
+            record = t.DataContext as ReadingRecord;
 
             int StartPageNo = 0;
             int EndPageNo = 0;
@@ -96,6 +98,7 @@ namespace jadeface
                     record.UserId = phoneAppServeice.State["username"].ToString();
                     record.Timestamp = DateTime.Now.ToString();
                     bookService.insertRecord(record);
+                    record = null;
 
                     if (EndPageNo == book.PageNo)
                     {
