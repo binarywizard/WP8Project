@@ -83,8 +83,8 @@
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Name="RecordDateTime" Text="{Binding DateTime}" />
-                                <TextBlock Name="RecordStartPage" Text="{Binding StartPageNo}" />
+                                <TextBlock Name="RecordDateTime" Text="{Binding Timestamp}" />
+                                <TextBlock Name="RecordStartPage" Text="{Binding StartPageNo}" HorizontalAlignment="Right" />
                                 <TextBlock Text="页到" />
                                 <TextBlock Name="RecordEndPage" Text="{Binding EndPageNo}" />
                                 <TextBlock Text="页" />

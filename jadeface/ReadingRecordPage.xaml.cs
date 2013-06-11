@@ -36,7 +36,7 @@ namespace jadeface
         private BookService bookService;
 
         private BookListItem book;
-        private ReadingRecord record;
+        private ReadingRecord record = new ReadingRecord();
         private string currentISBN;
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -85,10 +85,12 @@ namespace jadeface
             Button t = (Button)sender;
             record = t.DataContext as ReadingRecord;
 
-            int StartPageNo = 0;
-            int EndPageNo = 0;
+            int StartPageNo;
+            int EndPageNo;
             if (int.TryParse(StartPage.Text, out StartPageNo) && int.TryParse(EndPage.Text, out EndPageNo))
             {
+                Debug.WriteLine("[DEBUG]SartPageNo is : " + StartPageNo);
+                Debug.WriteLine("[DEBUG]EndPageNo is : " + EndPageNo);
                 if (StartPageNo <= EndPageNo && StartPageNo >= 0 && EndPageNo <= book.PageNo)
                 {
                     record.StartPageNo = StartPageNo;
