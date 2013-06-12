@@ -90,8 +90,27 @@ namespace jadeface
             book.HaveReadPage = totalHaveReadPage;
             bookService.update(book);
 
+            //int days2forecast = ForecastDays2Finish(records, totalHaveReadPage);
+            Days2FinishTextBlock.Text = ForecastDays2Finish(records);
+
             readingProgressBar.DataContext = book;
             ReadingRecordHistory.ItemsSource = records;
+        }
+
+        private string ForecastDays2Finish(List<ReadingRecord> records)
+        {
+            ReadingRecord record = records.First();
+
+            TimeSpan ts = DateTime.Now - DateTime.Parse(record.Timestamp);
+            if (book.HaveReadPage == 0)
+            {
+                return "&#8734;";
+            }
+            else {
+                int days = (ts.Days + 1) * (book.PageNo - book.HaveReadPage) / book.HaveReadPage + 1;
+                return days.ToString();
+            }
+
         }
 
         private void ConfirmRecord_Click(object sender, RoutedEventArgs e)
@@ -105,7 +124,7 @@ namespace jadeface
             {
                 Debug.WriteLine("[DEBUG]SartPageNo is : " + StartPageNo);
                 Debug.WriteLine("[DEBUG]EndPageNo is : " + EndPageNo);
-                if (StartPageNo <= EndPageNo && StartPageNo >= 0 && EndPageNo <= book.PageNo)
+                if (StartPageNo <= EndPageNo && StartPageNo > 0 && EndPageNo <= book.PageNo)
                 {
                     record.StartPageNo = StartPageNo;
                     record.EndPageNo = EndPageNo;
@@ -198,6 +217,18 @@ namespace jadeface
                 totalHaveReadPage += (item.Y - item.X + 1);
             }
             return totalHaveReadPage;
+        }
+
+        private void FinishRead_Click(object sender, RoutedEventArgs e)
+        {
+            BookListItem book = readingProgressBar.DataContext as BookListItem;
+            book.HaveReadPage = book.PageNo;
+            book.Status = BookStatus.FINISHED;
+            bookService.update(book);
+            MessageBox.Show("又读完了一本书！");
+            //RefreshWishBookList();
+            //RefreshBookList();
+            //RefreshFinishBookList();
         }
     }
 
