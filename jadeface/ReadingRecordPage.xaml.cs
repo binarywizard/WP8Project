@@ -99,17 +99,18 @@ namespace jadeface
 
         private string ForecastDays2Finish(List<ReadingRecord> records)
         {
+            if (records.Count == 0)
+            {
+                return "\u221E";
+            }
+
             ReadingRecord record = records.First();
 
             TimeSpan ts = DateTime.Now - DateTime.Parse(record.Timestamp);
-            if (book.HaveReadPage == 0)
-            {
-                return "&#8734;";
-            }
-            else {
-                int days = (ts.Days + 1) * (book.PageNo - book.HaveReadPage) / book.HaveReadPage + 1;
-                return days.ToString();
-            }
+
+            int days = (ts.Days + 1) * (book.PageNo - book.HaveReadPage) / book.HaveReadPage + 1;
+            return days.ToString();
+
 
         }
 
