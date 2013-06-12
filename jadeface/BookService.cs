@@ -14,7 +14,7 @@ namespace jadeface
     public class BookService
     {
         private IMobileServiceTable<BookListItem> bookListTable = null;
-        private IMobileServiceTable<ReadingRecord> readingRecordsTable = null;
+        //private IMobileServiceTable<ReadingRecord> readingRecordsTable = null;
 
         private string dbPath;
 

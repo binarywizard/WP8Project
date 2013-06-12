@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:local="clr-namespace:jadeface"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -83,7 +84,7 @@
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" VerticalAlignment="Top" Background="{x:Null}">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Background="#FFEC9F9F" Height="120">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="120">
                                     <StackPanel Height="126" Width="80" Margin="0, 10, 0, 0">
                                         <Image>
                                             <Image.Source>
@@ -98,20 +99,20 @@
                                             <TextBlock Name="BookSearchMarking" Foreground="Black" FontSize="16" Text="{Binding Marking}" Margin="10,5" ></TextBlock>
                                             <!--<TextBlock Name="BookSearchPublisher" Foreground="Black" FontSize="16" Text="{Binding Publisher}" Margin="10,5" ></TextBlock>-->
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="220,0,0,0">
-                                                <TextBlock Text="{Binding CurPageNo}" FontSize="16" HorizontalAlignment="Right"></TextBlock>
+                                                <TextBlock Name="HaveReadPage" Text="{Binding HaveReadPage}" FontSize="16" HorizontalAlignment="Right"></TextBlock>
                                                 <TextBlock Text="/" FontSize="16" ></TextBlock >
-                                                <TextBlock Text="{Binding PageNo}" FontSize="16" HorizontalAlignment="Left"></TextBlock>
+                                                <TextBlock Name="PageNo" Text="{Binding PageNo}" FontSize="16" HorizontalAlignment="Left"></TextBlock>
                                                 <TextBlock Text="页" FontSize="16" ></TextBlock>
                                             </StackPanel>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
-                                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Background="AliceBlue">
-                                    <ProgressBar Value="{Binding CurPageNo}" Minimum="0" Maximum="{Binding PageNo}" Background="Blue" Foreground="Red" 
-                                                                         Height="10" Width="350" Margin="0,0,0,10"/>
+                                <StackPanel VerticalAlignment="Top">
+                                    <local:RobusterProgressBar Maximum="{Binding PageNo}"  Minimum="0" Value="{Binding HaveReadPage}" HorizontalAlignment="Right"
+                                                               Foreground="Green" Background="Blue" Height="10" Width="360" Margin="0,0,-5,10" />
                                 </StackPanel>
                             </StackPanel>
-
+    
                             <!--<StackPanel Orientation="Vertical" Background="#CCCC99">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBox Text="{Binding CurPageNo}" Foreground="Black" LostFocus="CurPageSave_LostFocus"></TextBox>
@@ -125,7 +126,7 @@
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
                 </phone:LongListSelector>
-
+                
             </Grid>
         </phone:PivotItem>
 

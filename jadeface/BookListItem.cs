@@ -43,8 +43,8 @@ namespace jadeface
         [DataMember(Name = "pageno")]
         public int PageNo { get; set; }
 
-        [DataMember(Name = "curpageno")]
-        public int CurPageNo { get; set; }
+        [DataMember(Name = "havereadpage")]
+        public int HaveReadPage { get; set; }
 
         [DataMember(Name = "publisher")]
         public string Publisher { get; set; }

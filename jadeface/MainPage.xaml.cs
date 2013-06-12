@@ -16,6 +16,7 @@ using SQLite;
 using Windows.Storage;
 using Microsoft.Phone.Net.NetworkInformation;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace jadeface
 {
@@ -37,6 +38,8 @@ namespace jadeface
 
         delegate void DownDelegate(List<BookListItem> books);
         DownDelegate downDelegate;
+
+        RobusterProgressBar robusterProgressBar = new RobusterProgressBar();
 
         // Constructor
         public MainPage()
@@ -66,8 +69,8 @@ namespace jadeface
             Debug.WriteLine("[DEBUG]Navigate to MainPage...");
             bookService = BookService.getInstance();
             RefreshBookList();
-            RefreshWishBookList();
-            RefreshFinishBookList(); 
+            //RefreshWishBookList();
+            //RefreshFinishBookList(); 
             base.OnNavigatedTo(e);
         }
 
@@ -176,7 +179,7 @@ namespace jadeface
                         if ((bool)rb3.IsChecked)
                         {
                             Debug.WriteLine("[DEBUG]A Finish Book Added.");
-                            book.CurPageNo = book.PageNo;
+                            book.HaveReadPage = book.PageNo;
                             book.Status = BookStatus.FINISHED;
                         }
                         List<BookListItem> items = bookService.searchByISBN(book.ISBN, phoneAppServeice.State["username"].ToString());
@@ -205,17 +208,17 @@ namespace jadeface
                 }
             };
         }
-
+        
         private void RefreshBookList()
         {
             List<BookListItem> books = bookService.RefreshBookList(phoneAppServeice.State["username"].ToString());
             foreach (BookListItem item in books)
             {
-                Debug.WriteLine("[DEBUG]Item Status is : " + item.Status);
+                Debug.WriteLine("[DEBUG]Item Status is : " + item.Status + " | Title is : " + item.Title + " | HaveReadPage : " + item.HaveReadPage + " | PageNo : " + item.PageNo);
             }
             BookListItems.ItemsSource = books;
         }
-
+        
         private void RefreshWishBookList()
         {
             List<BookListItem> books = bookService.RefreshWishBookList(phoneAppServeice.State["username"].ToString());
@@ -264,39 +267,39 @@ namespace jadeface
             NavigationService.Navigate(new Uri("/BookDetailPage.xaml?BookISBN=" + book.ISBN, UriKind.Relative));
         }
 
-        private void CurPageSave_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox t = (TextBox)sender;
-            BookListItem book = t.DataContext as BookListItem;
+        //private void CurPageSave_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    TextBox t = (TextBox)sender;
+        //    BookListItem book = t.DataContext as BookListItem;
             
-            int CurPageNo = 0;
-            if (int.TryParse(t.Text, out CurPageNo))
-            {
-                if (CurPageNo < book.PageNo && CurPageNo >= 0)
-                {
-                    book.CurPageNo = CurPageNo;
-                    bookService.update(book);
-                }
-                else if (CurPageNo == book.PageNo)
-                {
-                    book.CurPageNo = CurPageNo;
-                    book.Status = BookStatus.FINISHED;
-                    bookService.update(book);
-                    MessageBox.Show("又读完了一本书！");
-                }
-                else
-                {
-                    MessageBox.Show("页码的范围有误，请重新输入！");
-                }
+        //    int CurPageNo = 0;
+        //    if (int.TryParse(t.Text, out CurPageNo))
+        //    {
+        //        if (CurPageNo < book.PageNo && CurPageNo >= 0)
+        //        {
+        //            book.CurPageNo = CurPageNo;
+        //            bookService.update(book);
+        //        }
+        //        else if (CurPageNo == book.PageNo)
+        //        {
+        //            book.CurPageNo = CurPageNo;
+        //            book.Status = BookStatus.FINISHED;
+        //            bookService.update(book);
+        //            MessageBox.Show("又读完了一本书！");
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("页码的范围有误，请重新输入！");
+        //        }
 
-            }
-            else
-            {
-                MessageBox.Show("请输入有效的页码！");
-            }
-            RefreshBookList();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("请输入有效的页码！");
+        //    }
+        //    RefreshBookList();
            
-        }
+        //}
 
         private void Reading_Click(object sender, RoutedEventArgs e)
         {
@@ -314,7 +317,7 @@ namespace jadeface
         {
             Button b = (Button)sender;
             BookListItem book = b.DataContext as BookListItem;
-            book.CurPageNo = book.PageNo;
+            book.HaveReadPage = book.PageNo;
             book.Status = BookStatus.FINISHED;
             bookService.update(book);
             MessageBox.Show("又读完了一本书！");
@@ -363,12 +366,7 @@ namespace jadeface
 
         private void ApplicationBarIconButton_Click_Refresh(object sender, EventArgs e)
         {
-            List<BookListItem> books = bookService.RefreshBookList(phoneAppServeice.State["username"].ToString());
-            foreach (BookListItem item in books)
-            {
-                Debug.WriteLine("[DEBUG]Item Status is : " + item.Status);
-            }
-            BookListItems.ItemsSource = books;
+            RefreshBookList();
         }
 
         private void ApplicationBarMenuItem_Click_Setting(object sender, EventArgs e)
@@ -394,4 +392,5 @@ namespace jadeface
             NavigationService.Navigate(new Uri("/ReadingRecordPage.xaml?BookISBN=" + book.ISBN, UriKind.Relative));
         }
     }
+
 }

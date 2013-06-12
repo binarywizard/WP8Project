@@ -13,17 +13,17 @@ namespace jadeface
 
     public class SimpleUnitTest
     {
-        [TestMethod]
-        public void BookListItemTest()                  //POJO测试
-        {
-            BookListItem item = new BookListItem();
+        //[TestMethod]
+        //public void BookListItemTest()                  //POJO测试
+        //{
+        //    BookListItem item = new BookListItem();
 
-            item.Author = "test";
-            Assert.IsTrue(item.Author.Equals("test"));
+        //    item.Author = "test";
+        //    Assert.IsTrue(item.Author.Equals("test"));
 
-            item.CurPageNo = 100;
-            Assert.IsTrue(item.CurPageNo == 100);
-        }
+        //    item.CurPageNo = 100;
+        //    Assert.IsTrue(item.CurPageNo == 100);
+        //}
 
         [TestMethod]
         public void BookServiceInsertBoundaryTest()                    //BookService边界测试
@@ -76,46 +76,46 @@ namespace jadeface
 
         }
 
-        [TestMethod]
-        public void BookServiceInsertFuncTest()               //BookService功能测试
-        {
-            BookService service = BookService.getInstance();
+        //[TestMethod]
+        //public void BookServiceInsertFuncTest()               //BookService功能测试
+        //{
+        //    BookService service = BookService.getInstance();
 
-            BookListItem book2 = new BookListItem();    //正常测试需要的数据
-            book2.UserId = "TestUser";
-            book2.Title = "TestBook";
-            book2.PageNo = 100;
-            book2.CurPageNo = 0;
-            book2.Id = 0;
-            book2.Publisher = "TestPublisher";
-            book2.Author = "TestAuthor";
-            book2.ISBN = "10010";
+        //    BookListItem book2 = new BookListItem();    //正常测试需要的数据
+        //    book2.UserId = "TestUser";
+        //    book2.Title = "TestBook";
+        //    book2.PageNo = 100;
+        //    book2.CurPageNo = 0;
+        //    book2.Id = 0;
+        //    book2.Publisher = "TestPublisher";
+        //    book2.Author = "TestAuthor";
+        //    book2.ISBN = "10010";
 
-            bool ret4 = service.insert(book2);                   //正常测试1，插入
-            Assert.IsTrue(ret4 == true);
-        }
+        //    bool ret4 = service.insert(book2);                   //正常测试1，插入
+        //    Assert.IsTrue(ret4 == true);
+        //}
 
-        [TestMethod]
-        public void BookServiceSearchFuncTest()               //BookService功能测试
-        {
-            BookService service = BookService.getInstance();
+        //[TestMethod]
+        //public void BookServiceSearchFuncTest()               //BookService功能测试
+        //{
+        //    BookService service = BookService.getInstance();
 
-            List<BookListItem> list;
+        //    List<BookListItem> list;
 
-            BookListItem book2 = new BookListItem();    //正常测试需要的数据
-            book2.UserId = "TestUser";
-            book2.Title = "TestBook";
-            book2.PageNo = 100;
-            book2.CurPageNo = 0;
-            book2.Id = 0;
-            book2.Publisher = "TestPublisher";
-            book2.Author = "TestAuthor";
-            book2.ISBN = "10010";
+        //    BookListItem book2 = new BookListItem();    //正常测试需要的数据
+        //    book2.UserId = "TestUser";
+        //    book2.Title = "TestBook";
+        //    book2.PageNo = 100;
+        //    book2.CurPageNo = 0;
+        //    book2.Id = 0;
+        //    book2.Publisher = "TestPublisher";
+        //    book2.Author = "TestAuthor";
+        //    book2.ISBN = "10010";
 
-            list = service.searchByISBN(book2.ISBN, "TestUser");
-            Assert.IsTrue(list.Count == 1);                      //正常测试2，查询
+        //    list = service.searchByISBN(book2.ISBN, "TestUser");
+        //    Assert.IsTrue(list.Count == 1);                      //正常测试2，查询
 
-        }
+        //}
 
         [TestMethod]
         public void BookServiceUpdateFuncTest()               //BookService功能测试
@@ -130,24 +130,24 @@ namespace jadeface
             Assert.IsTrue(ret5 == true);
         }
 
-        [TestMethod]
-        public void BookServiceDeleteFuncTest()               //BookService功能测试
-        {
-            BookService service = BookService.getInstance();
+        //[TestMethod]
+        //public void BookServiceDeleteFuncTest()               //BookService功能测试
+        //{
+        //    BookService service = BookService.getInstance();
 
-            BookListItem book2 = new BookListItem();    //正常测试需要的数据
-            book2.UserId = "TestUser";
-            book2.Title = "TestBook";
-            book2.PageNo = 100;
-            book2.CurPageNo = 0;
-            book2.Id = 0;
-            book2.Publisher = "TestPublisher";
-            book2.Author = "TestAuthor";
-            book2.ISBN = "10010";
+        //    BookListItem book2 = new BookListItem();    //正常测试需要的数据
+        //    book2.UserId = "TestUser";
+        //    book2.Title = "TestBook";
+        //    book2.PageNo = 100;
+        //    book2.CurPageNo = 0;
+        //    book2.Id = 0;
+        //    book2.Publisher = "TestPublisher";
+        //    book2.Author = "TestAuthor";
+        //    book2.ISBN = "10010";
 
-            bool ret6 = service.delete(book2, "TestUser");       //正常测试4，删除
-            Assert.IsTrue(ret6 == true);
-        }
+        //    bool ret6 = service.delete(book2, "TestUser");       //正常测试4，删除
+        //    Assert.IsTrue(ret6 == true);
+        //}
 
         [TestMethod]
         public void RefreshWishBookListBoundaryTest()                             //刷新愿望书单边界测试

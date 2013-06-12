@@ -84,6 +84,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Name="RecordDateTime" Text="{Binding Timestamp}" />
+                                <TextBlock Text="  " />
                                 <TextBlock Name="RecordStartPage" Text="{Binding StartPageNo}" HorizontalAlignment="Right" />
                                 <TextBlock Text="页到" />
                                 <TextBlock Name="RecordEndPage" Text="{Binding EndPageNo}" />

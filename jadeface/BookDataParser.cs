@@ -27,7 +27,7 @@ namespace jadeface
                 book.Marking = Marking;
                 int.TryParse((string)json["books"][i]["pages"], out PageNo);
                 book.PageNo = PageNo;
-                book.CurPageNo = 0;
+                book.HaveReadPage = 0;
                 book.Publisher = (string)json["books"][i]["publisher"];
                 book.Image = (string)json["books"][i]["images"]["small"];
                 book.Summary = (string)json["books"][i]["summary"];

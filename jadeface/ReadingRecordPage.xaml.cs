@@ -11,6 +11,7 @@ using SQLite;
 using System.IO;
 using Windows.Storage;
 using System.Diagnostics;
+using System.Runtime.Serialization;
 
 namespace jadeface
 {
@@ -35,7 +36,7 @@ namespace jadeface
         PhoneApplicationService phoneAppServeice = PhoneApplicationService.Current;
         private BookService bookService;
 
-        private BookListItem book;
+        private BookListItem book = new BookListItem();
         private ReadingRecord record = new ReadingRecord();
         private string currentISBN;
 
@@ -77,6 +78,15 @@ namespace jadeface
             {
                 Debug.WriteLine("[DEBUG]Record belongs to the book with ISBN: " + record.ISBN);
             }
+            int totalHaveReadPage = CaculateHaveReadPage(records);
+            if (totalHaveReadPage == book.PageNo)
+            {
+                book.Status = BookStatus.FINISHED;
+                MessageBox.Show("又读完了一本书！");
+            }
+            book.HaveReadPage = totalHaveReadPage;
+            bookService.update(book);
+            
             ReadingRecordHistory.ItemsSource = records;
         }
 
@@ -102,12 +112,12 @@ namespace jadeface
                     bookService.insertRecord(record);
                     record = null;
 
-                    if (EndPageNo == book.PageNo)
-                    {
-                        book.Status = BookStatus.FINISHED;
-                        bookService.update(book);
-                        MessageBox.Show("又读完了一本书！");
-                    }
+                    //if (EndPageNo == book.PageNo)
+                    //{
+                    //    book.Status = BookStatus.FINISHED;
+                    //    bookService.update(book);
+                    //    MessageBox.Show("又读完了一本书！");
+                    //}
                 }
                 else if (StartPageNo > EndPageNo)
                 {
@@ -123,7 +133,77 @@ namespace jadeface
             {
                 MessageBox.Show("请输入有效的页码！");
             }
+            StartPage.Text = "";
+            EndPage.Text = "";
             RefreshReadingRecord();
+        }
+
+        private List<Point> GetHaveReadPage(List<ReadingRecord> records)
+        {
+            List<Point> pageNoPairs = new List<Point>();
+            foreach (var item in records)
+            {
+                Point point = new Point();
+                point.X = item.StartPageNo;
+                point.Y = item.EndPageNo;
+                pageNoPairs.Add(point);
+            }
+            Debug.WriteLine("[DEBUG]pageNoPairs.Count = " + pageNoPairs.Count);
+            foreach (var item in pageNoPairs)
+            {
+                Debug.WriteLine("[DEBUG]pageNoPair : " + item.X + " " + item.Y);
+            }
+            return pageNoPairs;
+        }
+
+        private List<Point> CombineHaveReadPage(List<Point> pageNoPairs)
+        {
+            List<Point> data = pageNoPairs;
+            for (int i = 1; i < data.Count; i++)
+            {
+                for (int m = i; m < data.Count; m++)
+                {
+                    if (data[m].X <= data[i - 1].Y && data[m].Y >= data[i - 1].X && m != i - 1)
+                    {
+                        Point tempPoint = new Point();
+                        tempPoint.X = data[i - 1].X > data[m].X ? data[m].X : data[i - 1].X;
+                        tempPoint.Y = data[i - 1].Y > data[m].Y ? data[i - 1].Y : data[m].Y;
+                        data[i - 1] = tempPoint;//结构体是值传递，要修改只能通过这种方式  
+                        data.Remove(data[m]);
+                        m = 0;//从头开始此次循环合并  
+                    }
+                }
+            }
+
+            foreach (var item in data)
+            {
+                Debug.WriteLine("[DEBUG]startPage and endPage : " + item.ToString());
+            }
+
+            return data;
+        }
+
+        private int CaculateHaveReadPage(List<ReadingRecord> records)
+        {
+            List<Point> pageNoPairs = GetHaveReadPage(records);
+            List<Point> data = CombineHaveReadPage(pageNoPairs);
+
+            int totalHaveReadPage = 0;
+            foreach (var item in data)
+            {
+                totalHaveReadPage += (item.Y - item.X + 1);
+            }
+            return totalHaveReadPage;
+        }
+    }
+
+    class Point
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public override string ToString()
+        {
+            return string.Format("X = {0}, Y = {1}.", X, Y);
         }
     }
 }
