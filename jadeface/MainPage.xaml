@@ -14,7 +14,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-	<phone:PhoneApplicationPage.Resources>
+	<!--<phone:PhoneApplicationPage.Resources>
 		<Style x:Key="ButtonStyle" TargetType="Button">
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
@@ -69,7 +69,7 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-	</phone:PhoneApplicationPage.Resources>
+	</phone:PhoneApplicationPage.Resources>-->
 
 
     <phone:Pivot HorizontalAlignment="Left" Height="758" Title="Project Jadeface" VerticalAlignment="Top" Width="480" Background="#f6f7eb" Foreground="Black">

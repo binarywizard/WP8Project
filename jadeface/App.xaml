@@ -10,6 +10,11 @@
         <!--
         <local:LocalizedStrings xmlns:local="clr-namespace:jadeface" x:Key="LocalizedStrings"/>
         -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/BtnStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

@@ -76,7 +76,7 @@
                     <TextBlock Text="今天读了：" Foreground="Black" FontSize="{StaticResource PhoneFontSizeMediumLarge}"
                            VerticalAlignment="Center" Margin="0, 10" />
                     <Button Content="读完了" Name="finishButton" Foreground="Black" Margin="181, 0, 0, 0" 
-                            Width="120" Background="#FFCCCC99" BorderBrush="#FFCCCC99" />
+                            Width="120" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBox Name="StartPage" TextAlignment="Right" Text="{Binding StartPageNo}" Width="90" />
@@ -85,7 +85,7 @@
                     <TextBox Name="EndPage" TextAlignment="Right" Text="{Binding EndPageNo}" Width="90" />
                     <TextBlock Text="页" Foreground="Black" FontSize="{StaticResource PhoneFontSizeMedium}" 
                                VerticalAlignment="Center" />
-                    <Button Content="确认" Name="confirmButton" Foreground="Black" Margin="20, 0, 0, 0" 
+                    <Button Content="确认" Name="confirmButton" Foreground="Black" Margin="20, 0, 0, 0" Style="{StaticResource ButtonStyle}"
                             Width="120" Click="ConfirmRecord_Click" Background="#FFCCCC99" BorderBrush="#FFCCCC99" />
                 </StackPanel>
             </StackPanel>
