@@ -56,7 +56,10 @@ namespace jadeface
                 if (books.Count == 1)
                 {
                     book = books.First();
-                    BookInformationPanel.DataContext = book;
+                    BookInformationGrid.DataContext = book;
+
+                    StartPage.Text = "";
+                    EndPage.Text = "";
                     ReadingRecordPanel.DataContext = record;
                 }
                 Debug.WriteLine("[DEBUG]Navigate to ReadingRecordPage...");
@@ -86,7 +89,8 @@ namespace jadeface
             }
             book.HaveReadPage = totalHaveReadPage;
             bookService.update(book);
-            
+
+            readingProgressBar.DataContext = book;
             ReadingRecordHistory.ItemsSource = records;
         }
 
