@@ -127,4 +127,14 @@
         </Grid>
     </Grid>
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar 
+            IsVisible="True" IsMenuEnabled="False" Opacity="0.5">
+            <shell:ApplicationBarIconButton IconUri="icon\eye.png" Text="书籍信息" Click="ApplicationBarIconButton_Click_Check"/>
+            <shell:ApplicationBarIconButton IconUri="icon\appbar.edittext.rest.png" Text="做笔记" Click="ApplicationBarIconButton_Click_Note"/>
+            <!--<shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>-->
+            <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>

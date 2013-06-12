@@ -231,6 +231,20 @@ namespace jadeface
             //RefreshBookList();
             //RefreshFinishBookList();
         }
+
+
+        private void ApplicationBarIconButton_Click_Check(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/BookDetailPage.xaml?BookISBN=" + currentISBN, UriKind.Relative));
+        }
+
+        private void ApplicationBarIconButton_Click_Note(object sender, EventArgs e)
+        {
+        }
+
+        private void ApplicationBarIconButton_Click_Refresh(object sender, EventArgs e)
+        {
+        }
     }
 
     class Point

@@ -188,6 +188,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon\add.png" />
+    <Content Include="Icon\appbar.edittext.rest.png" />
     <Content Include="Icon\back.png" />
     <Content Include="Icon\cancel.png" />
     <Content Include="Icon\check.png" />
@@ -195,6 +196,7 @@
     <Content Include="Icon\delete.png" />
     <Content Include="Icon\download.png" />
     <Content Include="Icon\edit.png" />
+    <Content Include="Icon\eye.png" />
     <Content Include="Icon\feature.alarm.png" />
     <Content Include="Icon\feature.calendar.png" />
     <Content Include="Icon\feature.search.png" />
