@@ -27,6 +27,13 @@
             <TextBlock Text="登陆" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="Black"/>
         </StackPanel>
 
+        <StackPanel>
+            <shell:SystemTray.ProgressIndicator>
+                <shell:ProgressIndicator IsIndeterminate="true" IsVisible="True" Text="登陆中..." />
+            </shell:SystemTray.ProgressIndicator>
+        </StackPanel>
+
+
         <!--ContentPanel - 在此处放置其他内容-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel Orientation="Vertical">
@@ -40,7 +47,8 @@
                 </StackPanel>
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Content="登陆" Click="LoginButtonClick" Foreground="Black" BorderBrush="black"></Button>
-                    <Button Content="注册" Foreground="Black" BorderBrush="black"></Button>
+                    <Button Content="不登陆直接进入" Click="DefaultLoginButtonClick" Foreground="Black" BorderBrush="black" ></Button>
+                    <Button Content="注册" Click="RegButtonClick" Foreground="Black" BorderBrush="black" ></Button>   
                 </StackPanel>
 
             </StackPanel>

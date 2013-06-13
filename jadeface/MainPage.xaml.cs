@@ -84,6 +84,10 @@ namespace jadeface
             bookService = BookService.getInstance();
             RefreshBookList();
             //RefreshWishBookList();
+
+            //新增
+            RefreshReadingPlanItems();
+
             //RefreshFinishBookList(); 
             base.OnNavigatedTo(e);
         }
@@ -202,7 +206,11 @@ namespace jadeface
                         {
                             bookService.insert(book);
                             //InsertBookListItem(book);
-                            RefreshWishBookList();
+                            //RefreshWishBookList();
+
+                            //新增
+                            RefreshReadingPlanItems();
+
                             RefreshBookList();
                             //RefreshFinishBookList();
                         }
@@ -222,8 +230,8 @@ namespace jadeface
                 }
             };
         }
-        
-        public void RefreshBookList()
+
+        private void RefreshBookList()
         {
             List<BookListItem> books = bookService.RefreshBookList(phoneAppServeice.State["username"].ToString());
             foreach (BookListItem item in books)
@@ -233,15 +241,15 @@ namespace jadeface
             BookListItems.ItemsSource = books;
         }
         
-        private void RefreshWishBookList()
-        {
-            List<BookListItem> books = bookService.RefreshWishBookList(phoneAppServeice.State["username"].ToString());
-            foreach (BookListItem item in books)
-            {
-                Debug.WriteLine("[DEBUG]Item Status is : " + item.Status);
-            }
-            WishBookListItems.ItemsSource = books;
-        }
+        //private void RefreshWishBookList()
+        //{
+        //    List<BookListItem> books = bookService.RefreshWishBookList(phoneAppServeice.State["username"].ToString());
+        //    foreach (BookListItem item in books)
+        //    {
+        //        Debug.WriteLine("[DEBUG]Item Status is : " + item.Status);
+        //    }
+        //    WishBookListItems.ItemsSource = books;
+        //}
 
         //private void RefreshFinishBookList()
         //{
@@ -252,6 +260,17 @@ namespace jadeface
         //    }
         //    FinishBookListItems.ItemsSource = books;
         //}
+
+        private void RefreshReadingPlanItems()
+        {
+            List<ReadingPlan> plans = bookService.RefreshReadingPlan(phoneAppServeice.State["username"].ToString());
+            foreach (var item in plans)
+            {
+                Debug.WriteLine(item.Title + "\n" + item.DatePicker + "\n" + item.Priority + "\n");
+            }
+
+            ReadingPlanItems.ItemsSource = plans;
+        }
 
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
@@ -322,7 +341,12 @@ namespace jadeface
             book.Status = BookStatus.READING;
             bookService.update(book);
             MessageBox.Show("已经将本书添加到正在阅读的列表中！");
-            RefreshWishBookList();
+
+            //RefreshWishBookList();
+
+            //新增
+            RefreshReadingPlanItems();
+
             RefreshBookList();
             //RefreshFinishBookList();
         }
@@ -335,14 +359,18 @@ namespace jadeface
             book.Status = BookStatus.FINISHED;
             bookService.update(book);
             MessageBox.Show("又读完了一本书！");
-            RefreshWishBookList();
+            //RefreshWishBookList();
+
+            //新增
+            RefreshReadingPlanItems();
+
             RefreshBookList();
             //RefreshFinishBookList();
         }
 
         private void WishButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
-            RefreshWishBookList();
+            //RefreshWishBookList();
         }
 
         private void FinishButtonRefresh_Click(object sender, RoutedEventArgs e)
@@ -358,7 +386,11 @@ namespace jadeface
             Debug.WriteLine("[DEBUG]Rating is " + book.Rating);
             bookService.update(book);
             MessageBox.Show("本书的评分已经更新。");
-            RefreshWishBookList();
+
+
+            //RefreshWishBookList();
+
+
             RefreshBookList();
             //RefreshFinishBookList();
         }
@@ -415,6 +447,12 @@ namespace jadeface
         {
             ApplicationBar.IsVisible = true;
         }
+
+        private void ApplicationBarIconButton_Click_AddPlan(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AddReadingPlan.xaml",UriKind.Relative));
+        }
+
     }
 
 }

@@ -28,6 +28,7 @@ namespace jadeface
             dbConn = new SQLiteConnection(dbPath);
             dbConn.CreateTable<BookListItem>();
             dbConn.CreateTable<ReadingRecord>();
+            dbConn.CreateTable<ReadingPlan>();
         }
 
         public void destoryInstance()
@@ -222,6 +223,49 @@ namespace jadeface
             Debug.WriteLine("[DEBUG]records.Count = " + records.Count);
             return records;
         }
-        
+
+
+
+
+        //readingplan
+        public bool insertPlan(ReadingPlan plan)
+        {
+            if (plan.UserId == null || plan.ISBN == null || plan.UserId.Equals("") || plan.ISBN.Equals(""))
+            {
+                return false;
+            }
+
+            if (dbConn.Insert(plan) > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool deletePlan(ReadingPlan plan)
+        {
+            if (plan.Id.Equals(""))
+            {
+                return false;
+            }
+            Debug.WriteLine("delete from readingplan where Id = " + plan.Id);
+            SQLiteCommand command = dbConn.CreateCommand("delete from readingplan where Id = " + plan.Id);
+            command.ExecuteQuery<ReadingPlan>();
+            return true;
+        }
+
+        public List<ReadingPlan> RefreshReadingPlan(string username)
+        {
+            if (username.Equals("") || username == null)
+            {
+                return null;
+            }
+            Debug.WriteLine("[DEBUG]Refresh SQL is : " + "select * from readingplan where userid='" + username +"'");
+            SQLiteCommand command = dbConn.CreateCommand("select * from readingplan where userid='" + username +"'");
+            List<ReadingPlan> plans = command.ExecuteQuery<ReadingPlan>();
+            Debug.WriteLine("[DEBUG]records.Count = " + plans.Count);
+            return plans;
+        }
     }
 }

@@ -1,0 +1,91 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="jadeface.AddReadingPlan"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit ="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="#f6f7eb">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,20">
+            <TextBlock Text="添加读书计划" Foreground="Black" Style="{StaticResource PhoneTextTitle2Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - 在此处放置其他内容-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <!--<TextBox x:Name="bookname"   Text="书名" Foreground="#FF858282" GotFocus="TextBox_GotFocus"/>-->
+                <toolkit:ListPicker x:Name="booknamelist" Header="书名" Foreground="Black" BorderBrush="#FFCCCC99"
+                                    Background="{StaticResource PhoneTextBoxBrush}">
+                    <toolkit:ListPicker.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="Black" Text="书名" />
+                        </DataTemplate>
+                    </toolkit:ListPicker.HeaderTemplate>
+                </toolkit:ListPicker>
+                <toolkit:DatePicker x:Name="datePicker" Header="截止日期" Foreground="Black" BorderBrush="#FFCCCC99"
+                                    Style="{StaticResource DatePicker}">
+                    <toolkit:DatePicker.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="Black" Text="截止日期" />
+                        </DataTemplate>
+                    </toolkit:DatePicker.HeaderTemplate>
+                </toolkit:DatePicker>
+                <toolkit:ListPicker x:Name="prioritylist" Header="优先级" BorderBrush="#FFCCCC99" Foreground="Black"
+                                    Background="{StaticResource PhoneTextBoxBrush}">
+                    <toolkit:ListPicker.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="Black" Text="优先级" />
+                        </DataTemplate>
+                    </toolkit:ListPicker.HeaderTemplate>
+                </toolkit:ListPicker>
+                
+                <toolkit:ToggleSwitch x:Name="toggle" Content="开" IsChecked="true" Header="提醒" Click="toggle_Click"
+                                     Foreground="Black">
+                    <toolkit:ToggleSwitch.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="Black" Text="提醒" />
+                        </DataTemplate>
+                    </toolkit:ToggleSwitch.HeaderTemplate>
+                </toolkit:ToggleSwitch>
+                <toolkit:TimePicker x:Name="timepicker" Header="提醒时间" VerticalAlignment="Center" Foreground="Black" 
+                                    Style="{StaticResource TimePicker}">
+                    <toolkit:TimePicker.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="Black" Text="提醒时间" />
+                        </DataTemplate>
+                    </toolkit:TimePicker.HeaderTemplate>
+                </toolkit:TimePicker>
+                <TextBlock Text="备注" Margin="10,0,0,0" Foreground="Black" />
+                <TextBox x:Name="detail" Text="" BorderBrush="#FFCCCC99" />
+            </StackPanel>
+                       
+        </Grid>
+    </Grid>
+
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar 
+            IsVisible="True" IsMenuEnabled="True" Opacity="0.5"
+            StateChanged="ApplicationBar_StateChanged">
+            <shell:ApplicationBarIconButton IconUri="icon\save.png" Text="保存" Click="save_clicked"/>
+            <shell:ApplicationBarIconButton IconUri="icon\cancel.png" Text="取消" Click="cancel_clicked"/>    
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

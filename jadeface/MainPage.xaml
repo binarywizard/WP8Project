@@ -113,7 +113,7 @@
                                 </StackPanel>
                                 <StackPanel VerticalAlignment="Top">
                                     <local:RobusterProgressBar Maximum="{Binding PageNo}"  Minimum="0" Value="{Binding HaveReadPage}" HorizontalAlignment="Right"
-                                                               Foreground="Green" Background="Blue" Height="10" Width="350" Margin="0,0,-5,10" />
+                                                               Foreground="Green" Background="Red" Height="10" Width="350" Margin="0,0,-5,10" />
                                 </StackPanel>
                             </StackPanel>
     
@@ -152,8 +152,7 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Row ="0" Grid.ColumnSpan="2" x:Name="WishButtonRefresh" Click="WishButtonRefresh_Click" Content="刷新我的书籍列表" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}"/>
-                    <phone:LongListSelector Grid.Row="1" Grid.ColumnSpan="2" Name="WishBookListItems">
+                    <phone:LongListSelector Grid.Row="1" Grid.ColumnSpan="2" Name="ReadingPlanItems">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
@@ -163,26 +162,38 @@
                                         <!-- Expanded Header Start -->
                                         <toolkit:ExpanderView.Header>
                                             <StackPanel Orientation="Horizontal">
-                                                <StackPanel Height="126" Width="80" Margin="12, 0">
+                                                <!--<StackPanel Height="126" Width="80" Margin="12, 0">
                                                     <Image>
                                                         <Image.Source>
                                                             <BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="{Binding Image}" />
                                                         </Image.Source>
                                                     </Image>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Vertical">
+                                                    
+                                                </StackPanel>-->
+                                                <StackPanel Orientation="Vertical"  Height="126" Width="280" Margin="12, 0">
                                                     <StackPanel Orientation="Vertical">
-                                                        <TextBlock Name="BookSearchTitle" Foreground="Black" FontSize="32" Text="{Binding Title}" Margin="10,5"></TextBlock>
-                                                        <TextBlock Name="BookSearchAuthor" Foreground="Black" FontSize="16" Text="{Binding Author}" Margin="10,5" ></TextBlock>
-                                                        <TextBlock Name="BookSearchPublisher" Foreground="Black" FontSize="16" Text="{Binding Publisher}" Margin="10,5" ></TextBlock>
+                                                        <TextBlock Name="PlanTitle" Foreground="Black" FontSize="32" Text="{Binding Title}" Margin="10,5"></TextBlock>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Name="PlanDate" Foreground="Black" FontSize="22" Text="{Binding DatePicker}" Margin="10,5" ></TextBlock>
+                                                            <TextBlock Name="PlanRingtime" Foreground="Black" FontSize="22" Text="{Binding RingTime}" Margin="10,5" ></TextBlock>
+                                                </StackPanel>
+                                                        
+                                                        <!--<TextBlock Name="BookSearchPublisher" Foreground="Black" FontSize="16" Text="{Binding Priority}" Margin="10,5" ></TextBlock>-->
                                                     </StackPanel>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <ProgressBar Value="{Binding CurPageNo}" Minimum="0" Maximum="{Binding PageNo}" Foreground="AliceBlue" Height="20" Width="250"></ProgressBar>
-                                                        <TextBlock Text="{Binding CurPageNo}" FontSize="16" ></TextBlock>
-                                                        <TextBlock Text="/" FontSize="16" ></TextBlock >
+                                                        <!--<TextBlock Text="共" FontSize="16" ></TextBlock>
                                                         <TextBlock Text="{Binding PageNo}" FontSize="16" ></TextBlock>
-                                                        <TextBlock Text="页" FontSize="16" ></TextBlock>
+                                                        <TextBlock Text="页" FontSize="16" ></TextBlock>-->
                                                     </StackPanel>
+                                                </StackPanel>
+                                                <StackPanel Width="100">
+                                                    <Image HorizontalAlignment="Right" x:Name="clock">
+                                                        <Image.Source>
+                                                            <BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="{Binding Image}" />
+                                                            <!--<BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="/Icon/111.png" />-->
+                                                        </Image.Source>
+                                                    </Image>
+                                                    
                                                 </StackPanel>
                                             </StackPanel>
                                         </toolkit:ExpanderView.Header>
@@ -321,7 +332,7 @@
             IsVisible="True" IsMenuEnabled="True" Opacity="0.5"
             StateChanged="ApplicationBar_StateChanged">
         <!--<shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>-->
-        <!--<shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加书籍" Click="ApplicationBarIconButton_Click_Add"/>-->
+        <shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加计划" Click="ApplicationBarIconButton_Click_AddPlan"/>
         <shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>
         <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
         <shell:ApplicationBar.MenuItems>

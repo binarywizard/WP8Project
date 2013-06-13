@@ -103,7 +103,7 @@
             
             <!--This panel shows the progress you have read-->
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                <ProgressBar Name="readingProgressBar" IsIndeterminate="False" Foreground="Red" Background="Blue" 
+                <ProgressBar Name="readingProgressBar" IsIndeterminate="False" Foreground="Green" Background="Red" 
                              Height="30" Width="400" Value="{Binding HaveReadPage}" Minimum="0" Maximum="{Binding PageNo}" />
             </StackPanel>
 

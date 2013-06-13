@@ -13,6 +13,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/BtnStyle.xaml" />
+                <ResourceDictionary Source="Resources/DatePicker.xaml" />
+                <ResourceDictionary Source="Resources/TimePicker.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
            
