@@ -14,7 +14,11 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/BtnStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+           
         </ResourceDictionary>
+
+        
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

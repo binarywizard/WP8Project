@@ -19,7 +19,8 @@
         <phone:Pivot Title="Project Jadeface" VerticalAlignment="Top" Background="#f6f7eb" Foreground="Black">
             <!--枢轴项一-->
             <phone:PivotItem Header="图书信息">
-                <Grid Width="450" x:Name="BookDetailGrid">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid Width="450" x:Name="BookDetailGrid" MinHeight="600">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -59,10 +60,11 @@
                         <TextBlock Text="{Binding Summary}" TextWrapping="Wrap"></TextBlock>
                     </StackPanel>
                     
-                    <StackPanel Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!--<StackPanel Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Button Content="返回" Foreground="Black" BorderBrush="Black" Click="BackButton_Click"></Button>
-                    </StackPanel>
+                    </StackPanel>-->
                 </Grid>
+                </ScrollViewer>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

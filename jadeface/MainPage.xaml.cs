@@ -47,6 +47,20 @@ namespace jadeface
             InitializeComponent();
         }
 
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (((Pivot)sender).SelectedIndex)
+            {
+                case 0:
+                    ApplicationBar = (ApplicationBar)Resources["AppBar1"];
+                    break;
+
+                case 1:
+                    ApplicationBar = (ApplicationBar)Resources["AppBar2"];
+                    break;
+            }
+        }
+
         private void DeleteBookListItem(BookListItem book)
         {
             bookService.delete(book, phoneAppServeice.State["username"].ToString());
@@ -190,7 +204,7 @@ namespace jadeface
                             //InsertBookListItem(book);
                             RefreshWishBookList();
                             RefreshBookList();
-                            RefreshFinishBookList();
+                            //RefreshFinishBookList();
                         }
                         else
                         {
@@ -209,7 +223,7 @@ namespace jadeface
             };
         }
         
-        private void RefreshBookList()
+        public void RefreshBookList()
         {
             List<BookListItem> books = bookService.RefreshBookList(phoneAppServeice.State["username"].ToString());
             foreach (BookListItem item in books)
@@ -229,15 +243,15 @@ namespace jadeface
             WishBookListItems.ItemsSource = books;
         }
 
-        private void RefreshFinishBookList()
-        {
-            List<BookListItem> books = bookService.RefreshFinishBookList(phoneAppServeice.State["username"].ToString());
-            foreach (BookListItem item in books)
-            {
-                Debug.WriteLine("[DEBUG]Item Status is : " + item.Status);
-            }
-            FinishBookListItems.ItemsSource = books;
-        }
+        //private void RefreshFinishBookList()
+        //{
+        //    List<BookListItem> books = bookService.RefreshFinishBookList(phoneAppServeice.State["username"].ToString());
+        //    foreach (BookListItem item in books)
+        //    {
+        //        Debug.WriteLine("[DEBUG]Item Status is : " + item.Status);
+        //    }
+        //    FinishBookListItems.ItemsSource = books;
+        //}
 
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
@@ -310,7 +324,7 @@ namespace jadeface
             MessageBox.Show("已经将本书添加到正在阅读的列表中！");
             RefreshWishBookList();
             RefreshBookList();
-            RefreshFinishBookList();
+            //RefreshFinishBookList();
         }
 
         private void FinishRead_Click(object sender, RoutedEventArgs e)
@@ -323,7 +337,7 @@ namespace jadeface
             MessageBox.Show("又读完了一本书！");
             RefreshWishBookList();
             RefreshBookList();
-            RefreshFinishBookList();
+            //RefreshFinishBookList();
         }
 
         private void WishButtonRefresh_Click(object sender, RoutedEventArgs e)
@@ -333,7 +347,7 @@ namespace jadeface
 
         private void FinishButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
-            RefreshFinishBookList();
+            //RefreshFinishBookList();
         }
 
         private void BookRatingSave(object sender, RoutedEventArgs e)
@@ -346,7 +360,7 @@ namespace jadeface
             MessageBox.Show("本书的评分已经更新。");
             RefreshWishBookList();
             RefreshBookList();
-            RefreshFinishBookList();
+            //RefreshFinishBookList();
         }
 
         /*
@@ -390,6 +404,16 @@ namespace jadeface
             var books = (LongListSelector)sender;
             BookListItem book = books.SelectedItem as BookListItem;
             NavigationService.Navigate(new Uri("/ReadingRecordPage.xaml?BookISBN=" + book.ISBN, UriKind.Relative));
+        }
+
+        private void BookListDrag(object sender, GestureEventArgs e)
+        {
+            ApplicationBar.IsVisible = false;
+        }
+
+        private void BookListDragCompleted(object sender, GestureEventArgs e)
+        {
+            ApplicationBar.IsVisible = true;
         }
     }
 

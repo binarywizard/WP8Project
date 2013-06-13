@@ -260,6 +260,41 @@ namespace jadeface
             }
         }
 
+        ///*
+        // * 处理菜单栏点击逻辑
+        // */
+        //private void ApplicationBarIconButton_Click_Change(object sender, EventArgs e)
+        //{
+        //}
+
+        //private void ApplicationBarIconButton_Click_Add(object sender, EventArgs e)
+        //{
+        //}
+
+        //private void ApplicationBarIconButton_Click_Search(object sender, EventArgs e)
+        //{
+        //}
+
+        //private void ApplicationBarIconButton_Click_Refresh(object sender, EventArgs e)
+        //{
+        //    (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/MainPage.xaml", UriKind.RelativeOrAbsolute));
+        //}
+
+        //private void ApplicationBarMenuItem_Click_Setting(object sender, EventArgs e)
+        //{
+        //}
+
+        //private void ApplicationBarMenuItem_Click_Update(object sender, EventArgs e)
+        //{
+        //}
+
+        //private void ApplicationBarMenuItem_Click_About(object sender, EventArgs e)
+        //{
+        //}
+
+        //private void ApplicationBar_StateChanged(object sender, Microsoft.Phone.Shell.ApplicationBarStateChangedEventArgs e)
+        //{
+        //}
 
     }
 }

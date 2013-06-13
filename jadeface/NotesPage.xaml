@@ -1,0 +1,64 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="jadeface.NotesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="#f6f7eb">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="Project Jadeface" Style="{StaticResource PhoneTextNormalStyle}" Foreground="Black"/>
+            <TextBlock Text="读书笔记" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="Black"/>
+        </StackPanel>
+
+        <!--ContentPanel - 在此处放置其他内容-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Foreground="Black" TextWrapping="Wrap">
+                        书名
+                    </TextBlock>
+                    <TextBlock Foreground="Black" TextWrapping="Wrap" TextAlignment="Center">
+                        测试书名
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Foreground="Black" TextWrapping="Wrap">
+                        2012-01-01 13:00:00
+                    </TextBlock>
+                    <TextBlock Foreground="Black" TextWrapping="Wrap">
+                        测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容
+                        测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容
+                        测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容
+                        测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容
+                    </TextBlock>
+                </StackPanel>
+                <TextBox Height="220">
+                    <TextBox.Text>
+                        请把笔记内容输入到这里
+                    </TextBox.Text>
+                </TextBox>
+                <Button Foreground="Black" Content="保存笔记" BorderBrush="Black"></Button>
+            </StackPanel>
+           
+    
+
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

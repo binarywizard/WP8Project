@@ -72,15 +72,18 @@
 	</phone:PhoneApplicationPage.Resources>-->
 
 
-    <phone:Pivot HorizontalAlignment="Left" Height="758" Title="Project Jadeface" VerticalAlignment="Top" Width="480" Background="#f6f7eb" Foreground="Black">
+    <phone:Pivot HorizontalAlignment="Left" Height="758" Title="Project Jadeface" VerticalAlignment="Top" Width="480" Background="#f6f7eb" Foreground="Black" SelectionChanged="Pivot_SelectionChanged">
 
         <!-- Book List Pivot -->
         <phone:PivotItem CacheMode="{x:Null}" Header="读书" Margin="0,12" Height="621" VerticalAlignment="Top">
 
-            <Grid x:Name="ListContentPanel" Margin="25,0,10,0" Height="566">
+            <Grid x:Name="ListContentPanel" Margin="25,0,10,0" Height="600">
 
                 <!--<Button Grid.Row ="0" Grid.ColumnSpan="2" x:Name="ButtonRefresh" Click="ButtonRefresh_Click" Content="刷新我的书籍列表" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}"/>-->
                 <phone:LongListSelector Name="BookListItems" HorizontalContentAlignment="Center" Foreground="Black" SelectionChanged="SelectABook">
+                    <toolkit:GestureService.GestureListener>
+                        <toolkit:GestureListener DragStarted="BookListDrag" DragCompleted="BookListDragCompleted" />
+                    </toolkit:GestureService.GestureListener>
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="#FFCCCC99" BorderThickness="2">
@@ -215,79 +218,29 @@
 
         <phone:PivotItem CacheMode="{x:Null}" Header="分析" >
             <Grid x:Name="FinishListLayoutRoot" Background="Transparent">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                <!--ContentPanel - 在此处放置其他内容-->
+                <Grid x:Name="ContentPanel" Margin="12,0,12,0">
+                    <Grid>
+                        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="172" Margin="30,24,0,0" Stroke="Black" VerticalAlignment="Top" Width="172">
+                        </Ellipse>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="测试1" FontSize="30" Foreground="Black" Margin="72,84,294,483" Width="90" />
+                    </Grid>
 
-                <Grid x:Name="FinishListContentPanel" Grid.Row="1" Margin="12,0,12,0" Height="593" VerticalAlignment="Bottom">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*" />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="172" Margin="237,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="172"/>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="测试2" FontSize="30" Foreground="Black" Margin="282,148,84,419" Width="90" />
+                    </Grid>
 
-                    <Button Grid.Row ="0" Grid.ColumnSpan="2" x:Name="FinishButtonRefresh" Click="FinishButtonRefresh_Click" Content="刷新我的书籍列表" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}"/>
-                    <phone:LongListSelector Grid.Row="1" Grid.ColumnSpan="2" Name="FinishBookListItems">
-                        <phone:LongListSelector.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
+                    <Grid>
+                        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="220" Margin="10,262,0,0" Stroke="Black" VerticalAlignment="Top" Width="220"/>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="测试3" FontSize="30" Foreground="Black" Margin="80,354,286,213" Width="90" />
+                    </Grid>
 
-                                    <toolkit:ExpanderView Foreground="Black" FontSize="28" x:Name="expander">
+                    <Grid>
+                        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="130" Margin="279,321,0,0" Stroke="Black" VerticalAlignment="Top" Width="130"/>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="测试4" FontSize="30" Foreground="Black" Margin="301,365,65,202" Width="90" />
+                    </Grid>
 
-                                        <!-- Expanded Header Start -->
-                                        <toolkit:ExpanderView.Header>
-                                            <StackPanel Orientation="Horizontal">
-                                                <StackPanel Height="126" Width="80" Margin="12, 0">
-                                                    <Image>
-                                                        <Image.Source>
-                                                            <BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="{Binding Image}" />
-                                                        </Image.Source>
-                                                    </Image>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Vertical">
-                                                    <StackPanel Orientation="Vertical">
-                                                        <TextBlock Name="BookSearchTitle" Foreground="Black" FontSize="32" Text="{Binding Title}" Margin="10,5"></TextBlock>
-                                                        <TextBlock Name="BookSearchAuthor" Foreground="Black" FontSize="16" Text="{Binding Author}" Margin="10,5" ></TextBlock>
-                                                        <TextBlock Name="BookSearchPublisher" Foreground="Black" FontSize="16" Text="{Binding Publisher}" Margin="10,5" ></TextBlock>
-                                                    </StackPanel>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <ProgressBar Value="{Binding CurPageNo}" Minimum="0" Maximum="{Binding PageNo}" Foreground="AliceBlue" Height="20" Width="250"></ProgressBar>
-                                                        <TextBlock Text="{Binding CurPageNo}" FontSize="16" ></TextBlock>
-                                                        <TextBlock Text="/" FontSize="16" ></TextBlock >
-                                                        <TextBlock Text="{Binding PageNo}" FontSize="16" ></TextBlock>
-                                                        <TextBlock Text="页" FontSize="16" ></TextBlock>
-                                                    </StackPanel>
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </toolkit:ExpanderView.Header>
-                                        <!-- Expanded Header End -->
-
-
-                                        <!-- Expanded Items Start -->
-                                        <toolkit:ExpanderView.Items>
-
-                                            <StackPanel Orientation="Vertical" Background="#CCCC99">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="评分" FontSize="12" VerticalAlignment="Center" Margin="5, 10"></TextBlock>
-                                                    <toolkit:Rating Name="BookRating" Background="#CCCC99" RatingItemCount="5" Value="{Binding Rating,Mode=TwoWay}" MaxWidth="200"></toolkit:Rating>
-                                                    <Button Content="保存" Foreground="Black" FontSize="12" Click="BookRatingSave"></Button>
-                                                    <Button Content="详细" Foreground="Black" FontSize="12" Click="BookDetail_Click"></Button>
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </toolkit:ExpanderView.Items>
-                                        <!-- Expanded Items End -->
-
-
-                                    </toolkit:ExpanderView>
-
-                                </StackPanel>
-                            </DataTemplate>
-                        </phone:LongListSelector.ItemTemplate>
-                    </phone:LongListSelector>
 
                 </Grid>
             </Grid>
@@ -349,32 +302,33 @@
         </phone:PivotItem>
     </phone:Pivot>
 
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar 
+    <phone:PhoneApplicationPage.Resources>
+    <shell:ApplicationBar x:Key="AppBar1" x:Name="ReadingPageApplicationBar"
             IsVisible="True" IsMenuEnabled="True" Opacity="0.5"
             StateChanged="ApplicationBar_StateChanged">
-            <shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>
-            <shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加书籍" Click="ApplicationBarIconButton_Click_Add"/>
-            <shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>
-            <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click_Setting"/>
-                <shell:ApplicationBarMenuItem Text="检查更新" Click="ApplicationBarMenuItem_Click_Update"/>
-                <shell:ApplicationBarMenuItem Text="关于" Click="ApplicationBarMenuItem_Click_About"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>
+        <shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加书籍" Click="ApplicationBarIconButton_Click_Add"/>
+        <shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>
+        <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
+        <shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click_Setting"/>
+            <shell:ApplicationBarMenuItem Text="检查更新" Click="ApplicationBarMenuItem_Click_Update"/>
+            <shell:ApplicationBarMenuItem Text="关于" Click="ApplicationBarMenuItem_Click_About"/>
+        </shell:ApplicationBar.MenuItems>
+    </shell:ApplicationBar>
 
-    <!--
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default" Opacity="1.0" x:Name="AppBar">
-
-            <shell:ApplicationBarIconButton IconUri="/Images/save.png" Text="save"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/delete.png" Text="delete"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/help.png" Text="help"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/settings.png" Text="settings"/>
-            
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
-    -->
+    <shell:ApplicationBar x:Key="AppBar2" 
+            IsVisible="True" IsMenuEnabled="True" Opacity="0.5"
+            StateChanged="ApplicationBar_StateChanged">
+        <!--<shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>-->
+        <!--<shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加书籍" Click="ApplicationBarIconButton_Click_Add"/>-->
+        <shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>
+        <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
+        <shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click_Setting"/>
+            <shell:ApplicationBarMenuItem Text="检查更新" Click="ApplicationBarMenuItem_Click_Update"/>
+            <shell:ApplicationBarMenuItem Text="关于" Click="ApplicationBarMenuItem_Click_About"/>
+        </shell:ApplicationBar.MenuItems>
+    </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.Resources>
 </phone:PhoneApplicationPage>

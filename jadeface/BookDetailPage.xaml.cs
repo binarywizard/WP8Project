@@ -34,7 +34,7 @@ namespace jadeface
             base.OnNavigatedTo(e);
 
             string ISBN = "";
-
+                                                                                                                                             
             if (NavigationContext.QueryString.TryGetValue("BookISBN", out ISBN))
             {
                 dbPath = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "jadeface.sqlite"));

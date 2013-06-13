@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -105,24 +106,29 @@
                 <ProgressBar Name="readingProgressBar" IsIndeterminate="False" Foreground="Red" Background="Blue" 
                              Height="30" Width="400" Value="{Binding HaveReadPage}" Minimum="0" Maximum="{Binding PageNo}" />
             </StackPanel>
-            
+
             <!--The history of reading record-->
             <StackPanel Grid.Row="4" Orientation="Vertical">
                 <TextBlock Text="历史记录:" Foreground="Black" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
-                <phone:LongListSelector Name="ReadingRecordHistory" Foreground="Black">
-                    <phone:LongListSelector.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Name="RecordDateTime" Text="{Binding Timestamp}" />
-                                <TextBlock Text="  " />
-                                <TextBlock Name="RecordStartPage" Text="{Binding StartPageNo}" HorizontalAlignment="Right" />
-                                <TextBlock Text="页到" />
-                                <TextBlock Name="RecordEndPage" Text="{Binding EndPageNo}" />
-                                <TextBlock Text="页" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <toolkit:GestureService.GestureListener>
+                        <toolkit:GestureListener DragStarted="RecordHistoryDrag" DragCompleted="RecordHistoryDragCompleted" />
+                    </toolkit:GestureService.GestureListener>
+                    <phone:LongListSelector Name="ReadingRecordHistory" Foreground="Black" Height="250">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Name="RecordDateTime" Text="{Binding Timestamp}" />
+                                    <TextBlock Text="  " />
+                                    <TextBlock Name="RecordStartPage" Text="{Binding StartPageNo}" HorizontalAlignment="Right" />
+                                    <TextBlock Text="页到" />
+                                    <TextBlock Name="RecordEndPage" Text="{Binding EndPageNo}" />
+                                    <TextBlock Text="页" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+                </ScrollViewer>
             </StackPanel>
         </Grid>
     </Grid>

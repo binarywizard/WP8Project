@@ -94,6 +94,7 @@ namespace jadeface
             Days2FinishTextBlock.Text = ForecastDays2Finish(records);
 
             readingProgressBar.DataContext = book;
+            readingProgressBar.Value = book.HaveReadPage;
             ReadingRecordHistory.ItemsSource = records;
         }
 
@@ -240,10 +241,22 @@ namespace jadeface
 
         private void ApplicationBarIconButton_Click_Note(object sender, EventArgs e)
         {
+            NavigationService.Navigate(new Uri("/NotesPage.xaml?BookISBN=" + currentISBN, UriKind.Relative));
         }
 
         private void ApplicationBarIconButton_Click_Refresh(object sender, EventArgs e)
         {
+            RefreshReadingRecord();
+        }
+
+        private void RecordHistoryDrag(object sender, GestureEventArgs e)
+        {
+            this.ApplicationBar.IsVisible = false;
+        }
+
+        private void RecordHistoryDragCompleted(object sender, GestureEventArgs e)
+        {
+            this.ApplicationBar.IsVisible = true;
         }
     }
 
