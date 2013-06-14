@@ -52,6 +52,7 @@ namespace jadeface
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            bookService = BookService.getInstance();
             this.datePicker.ValueChanged += new EventHandler<DateTimeValueChangedEventArgs>(picker_ValueChanged);
             List<string> pl = new List<string>() { "高", "中", "低" };
             this.prioritylist.ItemsSource = pl;
@@ -134,7 +135,7 @@ namespace jadeface
             plan.DatePicker = this.datePicker.ValueString;
             plan.Priority = (string)this.prioritylist.SelectedItem;
             plan.IsReminder = (bool)this.toggle.IsChecked;
-            plan.RingTime = this.timepicker.ValueString;
+            plan.RingTime = this.timepicker.Value.ToString();
             plan.Detail = this.detail.Text.ToString();
 
             if (plan.IsReminder)

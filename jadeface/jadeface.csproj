@@ -218,6 +218,8 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icon\111.png" />
+    <Content Include="Icon\222.png" />
     <Content Include="Icon\add.png" />
     <Content Include="Icon\appbar.edittext.rest.png" />
     <Content Include="Icon\back.png" />

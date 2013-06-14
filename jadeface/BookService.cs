@@ -267,5 +267,42 @@ namespace jadeface
             Debug.WriteLine("[DEBUG]records.Count = " + plans.Count);
             return plans;
         }
+
+        public int getReadingBookNo(string username)
+        {
+            Debug.WriteLine("select count(*) from booklistitem where userid='" + username + "' and status = 1");
+            SQLiteCommand command = dbConn.CreateCommand("select count(*) from booklistitem where userid='" + username + "' and status = 1");
+            int readingBookNo = command.ExecuteScalar<int>();
+            return readingBookNo;
+        }
+
+        public int getFinishedBookNo(string username)
+        {
+            Debug.WriteLine("select count(*) from booklistitem where userid='" + username + "' and status = 2");
+            SQLiteCommand command = dbConn.CreateCommand("select count(*) from booklistitem where userid='" + username + "' and status = 2");
+            int finishedBookNo = command.ExecuteScalar<int>();
+            return finishedBookNo;
+        }
+
+        public int getWishBookNo(string username)
+        {
+            Debug.WriteLine("select count(*) from booklistitem where userid='" + username + "' and status = 0");
+            SQLiteCommand command = dbConn.CreateCommand("select count(*) from booklistitem where userid='" + username + "' and status = 0");
+            int wishBookNo = command.ExecuteScalar<int>();
+            return wishBookNo;
+        }
+
+        public int getHaveReadDays(string username)
+        {
+            Debug.WriteLine("select * from readingrecord where userid='" + username + " '");
+            SQLiteCommand command = dbConn.CreateCommand("select * from readingrecord where userid='" + username + "'");
+            List<ReadingRecord> records = command.ExecuteQuery<ReadingRecord>();
+            
+            string lastDay = records.Last().Timestamp;
+            string firstDay = records.First().Timestamp;
+            TimeSpan ts = DateTime.Parse(lastDay) - DateTime.Parse(firstDay);
+            int days = ts.Days + 1;
+            return days;
+        }
     }
 }

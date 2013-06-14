@@ -58,6 +58,21 @@ namespace jadeface
                 case 1:
                     ApplicationBar = (ApplicationBar)Resources["AppBar2"];
                     break;
+                case 2:
+                    string username = phoneAppServeice.State["username"].ToString();
+
+                    int readingBookNo = bookService.getReadingBookNo(username);
+                    ReadingBookNoText.Text = readingBookNo.ToString();
+
+                    int finishedBookNo = bookService.getFinishedBookNo(username);
+                    FinishedBookNoText.Text = finishedBookNo.ToString();
+
+                    int wishBookNo = bookService.getWishBookNo(username);
+                    WishBookNoText.Text = wishBookNo.ToString();
+
+                    int haveReadDays = bookService.getHaveReadDays(username);
+                    HaveReadDaysText.Text = haveReadDays.ToString();
+                    break;
             }
         }
 
