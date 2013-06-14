@@ -21,7 +21,7 @@ using System.ComponentModel;
 namespace jadeface
 {
 
-    public partial class MainPage : PhoneApplicationPage
+    public partial class WishBookList : PhoneApplicationPage
     {
         // MobileServiceCollectionView implements ICollectionView (useful for databinding to lists) and 
         // is integrated with your Mobile Service to make it easy to bind your data to the ListView
@@ -42,7 +42,7 @@ namespace jadeface
         RobusterProgressBar robusterProgressBar = new RobusterProgressBar();
 
         // Constructor
-        public MainPage()
+        public WishBookList()
         {
             InitializeComponent();
         }
@@ -446,6 +446,11 @@ namespace jadeface
         {
         }
 
+        private void ApplicationBarIconButton_Click_SearchWish(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/WishBookListPage.xaml", UriKind.Relative));
+        }
+
         private void SelectABook(Object sender, SelectionChangedEventArgs e)
         {
             var books = (LongListSelector)sender;
@@ -466,6 +471,51 @@ namespace jadeface
         private void ApplicationBarIconButton_Click_AddPlan(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/AddReadingPlan.xaml",UriKind.Relative));
+        }
+
+        //编辑计划
+        private void EditPlan_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            ReadingPlan plan = b.DataContext as ReadingPlan;
+
+            NavigationService.Navigate(new Uri("/EditReadingPlan.xaml?planID=" + plan.Id, UriKind.Relative));
+        }
+
+        //删除计划
+        private void DeletePlan_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            ReadingPlan plan = b.DataContext as ReadingPlan;
+
+            MessageBoxResult result = MessageBox.Show("确认删除?",
+                "删除计划", MessageBoxButton.OKCancel);
+
+            if (result == MessageBoxResult.OK)
+            {
+                bookService.deletePlan(plan);
+            }
+
+            //RefreshWishBookList();
+
+            //新增
+            RefreshReadingPlanItems();
+
+            RefreshBookList();
+            //RefreshFinishBookList();
+        }
+
+
+        //显示计划中书籍详细信息
+        private void ReadingPlanBookDetail_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            ReadingPlan plan = b.DataContext as ReadingPlan;
+
+            string isbn = plan.ISBN;
+
+            Debug.WriteLine("the ISBN is:" + isbn);
+            NavigationService.Navigate(new Uri("/BookDetailPage.xaml?BookISBN=" + plan.ISBN, UriKind.Relative));
         }
 
     }

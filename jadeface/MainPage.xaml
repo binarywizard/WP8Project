@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="jadeface.MainPage"
+    x:Class="jadeface.WishBookList"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -98,14 +98,15 @@
                     <phone:LongListSelector Grid.Row="1" Grid.ColumnSpan="2" Name="ReadingPlanItems">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel>
+                                <Border BorderBrush="#FFCCCC99" BorderThickness="2">
+                                    <StackPanel>
 
-                                    <toolkit:ExpanderView Foreground="Black" FontSize="28" x:Name="expander">
+                                        <toolkit:ExpanderView Foreground="Black" FontSize="28" x:Name="expander">
 
-                                        <!-- Expanded Header Start -->
-                                        <toolkit:ExpanderView.Header>
-                                            <StackPanel Orientation="Horizontal">
-                                                <!--<StackPanel Height="126" Width="80" Margin="12, 0">
+                                            <!-- Expanded Header Start -->
+                                            <toolkit:ExpanderView.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <!--<StackPanel Height="126" Width="80" Margin="12, 0">
                                                     <Image>
                                                         <Image.Source>
                                                             <BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="{Binding Image}" />
@@ -113,53 +114,54 @@
                                                     </Image>
                                                     
                                                 </StackPanel>-->
-                                                <StackPanel Orientation="Vertical"  Height="126" Width="280" Margin="12, 0">
-                                                    <StackPanel Orientation="Vertical">
-                                                        <TextBlock Name="PlanTitle" Foreground="Black" FontSize="32" Text="{Binding Title}" Margin="10,5"></TextBlock>
+                                                    <StackPanel Orientation="Vertical"  Height="126" Width="280" Margin="12, 0">
+                                                        <StackPanel Orientation="Vertical">
+                                                            <TextBlock Name="PlanTitle" Foreground="Black" FontSize="32" Text="{Binding Title}" Margin="10,5"></TextBlock>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Name="PlanDate" Foreground="Black" FontSize="22" Text="{Binding DatePicker}" Margin="10,5" ></TextBlock>
+                                                                <TextBlock Name="PlanRingtime" Foreground="Black" FontSize="22" Text="{Binding RingTime}" Margin="10,5" ></TextBlock>
+                                                            </StackPanel>
+
+                                                            <!--<TextBlock Name="BookSearchPublisher" Foreground="Black" FontSize="16" Text="{Binding Priority}" Margin="10,5" ></TextBlock>-->
+                                                        </StackPanel>
                                                         <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Name="PlanDate" Foreground="Black" FontSize="22" Text="{Binding DatePicker}" Margin="10,5" ></TextBlock>
-                                                            <TextBlock Name="PlanRingtime" Foreground="Black" FontSize="22" Text="{Binding RingTime}" Margin="10,5" ></TextBlock>
-                                                </StackPanel>
-                                                        
-                                                        <!--<TextBlock Name="BookSearchPublisher" Foreground="Black" FontSize="16" Text="{Binding Priority}" Margin="10,5" ></TextBlock>-->
-                                                    </StackPanel>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <!--<TextBlock Text="共" FontSize="16" ></TextBlock>
+                                                            <!--<TextBlock Text="共" FontSize="16" ></TextBlock>
                                                         <TextBlock Text="{Binding PageNo}" FontSize="16" ></TextBlock>
                                                         <TextBlock Text="页" FontSize="16" ></TextBlock>-->
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                    <StackPanel Width="100" HorizontalAlignment="Right">
+                                                        <Image HorizontalAlignment="Right" x:Name="clock">
+                                                            <Image.Source>
+                                                                <BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="{Binding Image}" />
+                                                                <!--<BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="/Icon/111.png" />-->
+                                                            </Image.Source>
+                                                        </Image>
+
                                                     </StackPanel>
                                                 </StackPanel>
-                                                <StackPanel Width="100">
-                                                    <Image HorizontalAlignment="Right" x:Name="clock">
-                                                        <Image.Source>
-                                                            <BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="{Binding Image}" />
-                                                            <!--<BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="/Icon/111.png" />-->
-                                                        </Image.Source>
-                                                    </Image>
-                                                    
+                                            </toolkit:ExpanderView.Header>
+                                            <!-- Expanded Header End -->
+
+
+                                            <!-- Expanded Items Start -->
+                                            <toolkit:ExpanderView.Items>
+
+                                                <StackPanel Orientation="Vertical" Background="#CCCC99" Margin="-55,0,0,0" >
+                                                    <StackPanel Orientation="Horizontal" >
+                                                        <Button Content="编辑" Foreground="Black" FontSize="16" Click="EditPlan_Click"></Button>
+                                                        <Button Content="删除" Foreground="Black" FontSize="16" Click="DeletePlan_Click"></Button>
+                                                        <Button Content="书籍信息" Foreground="Black" FontSize="16" Click="ReadingPlanBookDetail_Click"></Button>
+                                                    </StackPanel>
                                                 </StackPanel>
-                                            </StackPanel>
-                                        </toolkit:ExpanderView.Header>
-                                        <!-- Expanded Header End -->
+                                            </toolkit:ExpanderView.Items>
+                                            <!-- Expanded Items End -->
 
-                                        
-                                        <!-- Expanded Items Start -->
-                                        <toolkit:ExpanderView.Items>
 
-                                            <StackPanel Orientation="Vertical" Background="#CCCC99">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Button Content="正在读" Foreground="Black" FontSize="16" Click="Reading_Click"></Button>
-                                                    <Button Content="读完了" Foreground="Black" FontSize="16" Click="FinishRead_Click"></Button>
-                                                    <Button Content="详细" Foreground="Black" FontSize="16" Click="BookDetail_Click"></Button>
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </toolkit:ExpanderView.Items>
-                                        <!-- Expanded Items End -->
-                                        
+                                        </toolkit:ExpanderView>
 
-                                    </toolkit:ExpanderView>
-
-                                </StackPanel>
+                                    </StackPanel>
+                                </Border>
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>
                     </phone:LongListSelector>
@@ -175,16 +177,16 @@
                 <!--ContentPanel - 在此处放置其他内容-->
                 <Grid x:Name="ContentPanel" Margin="12,0,12,0">
                     <Grid>
-                        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="172" Margin="30,24,0,0" Stroke="Black" VerticalAlignment="Top" Width="172">
+                        <Ellipse Fill="#FFCCCC99" HorizontalAlignment="Left" Height="172" Margin="30,24,0,0" Stroke="Black" VerticalAlignment="Top" Width="172">
                         </Ellipse>
-                        <StackPanel Margin="51,79,261,441" Orientation="Vertical">
+                        <StackPanel Margin="51,72,247,447" Orientation="Vertical">
                             <TextBlock Name="ReadingBookNoText" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="0" FontSize="30"  />
                             <TextBlock Text="正在读" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" />
                         </StackPanel>
                     </Grid>
 
                     <Grid>
-                        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="172" Margin="237,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="172"/>
+                        <Ellipse Fill="#FFCCCC99" HorizontalAlignment="Left" Height="172" Margin="237,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="172"/>
                         <StackPanel Margin="283,130,69,392" >
                             <TextBlock Name="FinishedBookNoText" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="0" FontSize="30" Foreground="Black" />
                             <TextBlock Text="已读完" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -192,16 +194,16 @@
                     </Grid>
 
                     <Grid>
-                        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="220" Margin="10,262,0,0" Stroke="Black" VerticalAlignment="Top" Width="220"/>
-                        <StackPanel Margin="82,330,272,195">
+                        <Ellipse Fill="#FFCCCC99" HorizontalAlignment="Left" Height="220" Margin="10,262,0,0" Stroke="Black" VerticalAlignment="Top" Width="220"/>
+                        <StackPanel Margin="75,341,272,181">
                             <TextBlock Name="WishBookNoText" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="0" FontSize="30" Foreground="Black" />
                             <TextBlock Text="想要读" HorizontalAlignment="Center" VerticalAlignment="Top" />
                         </StackPanel>
                     </Grid>
 
                     <Grid>
-                        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="130" Margin="279,321,0,0" Stroke="Black" VerticalAlignment="Top" Width="130"/>
-                        <StackPanel Margin="302,353,53,170" Width="77">
+                        <Ellipse Fill="#FFCCCC99" HorizontalAlignment="Left" Height="130" Margin="279,321,0,0" Stroke="Black" VerticalAlignment="Top" Width="130"/>
+                        <StackPanel Margin="302,358,36,165">
                             <TextBlock Name="HaveReadDaysText" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="0" FontSize="30" Foreground="Black" />
                             <TextBlock Text="总天数" HorizontalAlignment="Center" VerticalAlignment="Top" />
                         </StackPanel>
@@ -269,32 +271,32 @@
     </phone:Pivot>
 
     <phone:PhoneApplicationPage.Resources>
-    <shell:ApplicationBar x:Key="AppBar1" x:Name="ReadingPageApplicationBar"
+        <shell:ApplicationBar x:Key="AppBar1" x:Name="ReadingPageApplicationBar"
             IsVisible="True" IsMenuEnabled="True" Opacity="0.5"
             StateChanged="ApplicationBar_StateChanged">
-        <shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>
-        <shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加书籍" Click="ApplicationBarIconButton_Click_Add"/>
-        <shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>
-        <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
-        <shell:ApplicationBar.MenuItems>
-            <shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click_Setting"/>
-            <shell:ApplicationBarMenuItem Text="检查更新" Click="ApplicationBarMenuItem_Click_Update"/>
-            <shell:ApplicationBarMenuItem Text="关于" Click="ApplicationBarMenuItem_Click_About"/>
-        </shell:ApplicationBar.MenuItems>
-    </shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>
+            <shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加书籍" Click="ApplicationBarIconButton_Click_Add"/>
+            <shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>
+            <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click_Setting"/>
+                <shell:ApplicationBarMenuItem Text="检查更新" Click="ApplicationBarMenuItem_Click_Update"/>
+                <shell:ApplicationBarMenuItem Text="关于" Click="ApplicationBarMenuItem_Click_About"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
 
-    <shell:ApplicationBar x:Key="AppBar2" 
+        <shell:ApplicationBar x:Key="AppBar2" 
             IsVisible="True" IsMenuEnabled="True" Opacity="0.5"
             StateChanged="ApplicationBar_StateChanged">
-        <!--<shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>-->
-        <shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加计划" Click="ApplicationBarIconButton_Click_AddPlan"/>
-        <shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>
-        <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
-        <shell:ApplicationBar.MenuItems>
+            <!--<shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>-->
+            <shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加计划" Click="ApplicationBarIconButton_Click_AddPlan"/>
+            <shell:ApplicationBarIconButton IconUri="icon\like.png" Text="心愿单" Click="ApplicationBarIconButton_Click_SearchWish"/>
+            <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
+            <!--<shell:ApplicationBar.MenuItems>
             <shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click_Setting"/>
             <shell:ApplicationBarMenuItem Text="检查更新" Click="ApplicationBarMenuItem_Click_Update"/>
             <shell:ApplicationBarMenuItem Text="关于" Click="ApplicationBarMenuItem_Click_About"/>
-        </shell:ApplicationBar.MenuItems>
-    </shell:ApplicationBar>
+        </shell:ApplicationBar.MenuItems>-->
+        </shell:ApplicationBar>
     </phone:PhoneApplicationPage.Resources>
 </phone:PhoneApplicationPage>

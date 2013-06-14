@@ -1,0 +1,83 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="jadeface.WishBookListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <phone:Pivot Height="758" Title="Project Jadeface" VerticalAlignment="Top" Width="480" Background="#f6f7eb" Foreground="Black">
+
+        <!-- Book List Pivot -->
+        <phone:PivotItem CacheMode="{x:Null}" Header="心愿读书清单" Margin="0,12" Height="621" VerticalAlignment="Top">
+
+            <Grid x:Name="ListContentGrid" Margin="25,0,10,0" Height="600">
+
+                <!--<Button Grid.Row ="0" Grid.ColumnSpan="2" x:Name="ButtonRefresh" Click="ButtonRefresh_Click" Content="刷新我的书籍列表" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}"/>-->
+                <phone:LongListSelector Name="WishBookListItems" HorizontalContentAlignment="Center" Foreground="Black">
+                    <toolkit:GestureService.GestureListener>
+                        <toolkit:GestureListener />
+                    </toolkit:GestureService.GestureListener>
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#FFCCCC99" BorderThickness="2">
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="120">
+                                        <StackPanel Height="126" Width="80" Margin="7, 10, 0, 0">
+                                            <Image>
+                                                <Image.Source>
+                                                    <BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="{Binding Image}" />
+                                                </Image.Source>
+                                            </Image>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Name="BookSearchTitle" Foreground="Black" FontSize="32" Text="{Binding Title}" Margin="10,5"></TextBlock>
+                                            <TextBlock Name="BookSearchAuthor" Foreground="Black" FontSize="16" Text="{Binding Author}" Margin="10,5" ></TextBlock>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Name="BookSearchMarking" Foreground="Black" FontSize="16" Text="{Binding Marking}" Margin="10,5" ></TextBlock>
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="220,0,0,0">
+                                                    <TextBlock Name="HaveReadPage" Text="{Binding HaveReadPage}" FontSize="16" HorizontalAlignment="Right"></TextBlock>
+                                                    <TextBlock Text="/" FontSize="16" ></TextBlock >
+                                                    <TextBlock Name="PageNo" Text="{Binding PageNo}" FontSize="16" HorizontalAlignment="Left"></TextBlock>
+                                                    <TextBlock Text="页" FontSize="16" ></TextBlock>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
+
+            </Grid>
+        </phone:PivotItem>
+
+
+
+    </phone:Pivot>
+
+    <phone:PhoneApplicationPage.Resources>
+        <shell:ApplicationBar x:Key="AppBar1" x:Name="ReadingPageApplicationBar"
+            IsVisible="True" IsMenuEnabled="True" Opacity="0.5"
+            StateChanged="ApplicationBar_StateChanged">
+            <shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>
+            <shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加书籍" Click="ApplicationBarIconButton_Click_Add"/>
+            <shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>
+            <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click_Setting"/>
+                <shell:ApplicationBarMenuItem Text="检查更新" Click="ApplicationBarMenuItem_Click_Update"/>
+                <shell:ApplicationBarMenuItem Text="关于" Click="ApplicationBarMenuItem_Click_About"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.Resources>
+</phone:PhoneApplicationPage>

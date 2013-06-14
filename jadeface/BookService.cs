@@ -304,5 +304,21 @@ namespace jadeface
             int days = ts.Days + 1;
             return days;
         }
+
+        public bool updateReadingPlan(ReadingPlan plan)
+        {
+
+            if (plan.UserId == null || plan.Title == null || plan.ISBN == null || plan.UserId.Equals("") || plan.Title.Equals("") || plan.ISBN.Equals(""))
+            {
+                return false;
+            }
+
+            if (dbConn.Update(plan) > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
