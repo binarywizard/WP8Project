@@ -31,7 +31,6 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Foreground="Black" TextWrapping="Wrap">
-                        书名
                     </TextBlock>
                     <TextBlock Foreground="Black" TextWrapping="Wrap" TextAlignment="Center">
                         测试书名

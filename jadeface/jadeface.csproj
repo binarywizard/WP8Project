@@ -109,6 +109,7 @@
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Note.cs" />
     <Compile Include="NotesPage.xaml.cs">
       <DependentUpon>NotesPage.xaml</DependentUpon>
     </Compile>
@@ -170,6 +171,10 @@
     <Page Include="NotesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ProgressBarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WishBookListPage.xaml">
       <SubType>Designer</SubType>
@@ -259,6 +264,7 @@
     <Content Include="Icon\stop.png" />
     <Content Include="Icon\sync.png" />
     <Content Include="README_FIRST.txt" />
+    <Content Include="SleepAway.mp3" />
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="SplashScreenImage-01.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />

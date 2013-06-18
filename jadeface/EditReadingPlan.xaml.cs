@@ -12,6 +12,7 @@ using System.IO;
 using Windows.Storage;
 using System.Diagnostics;
 using System.Windows.Media;
+using Microsoft.Phone.Scheduler;
 
 namespace jadeface
 {
@@ -20,9 +21,13 @@ namespace jadeface
 
         private BookService bookService;
         PhoneApplicationService phoneAppServeice = PhoneApplicationService.Current;
-        List<BookListItem> bl;
+        //List<BookListItem> bl;
 
         ReadingPlan plan = null;
+
+        bool flag = true;//标记是否第一次进入页面
+
+        bool isRemind = false;//标记这个计划之前是否需要提醒
 
         //Local Database Storage Definition
         /// <summary>
@@ -37,16 +42,52 @@ namespace jadeface
         public EditReadingPlan()
         {
             InitializeComponent();
+            
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            this.datePicker.ValueChanged += new EventHandler<DateTimeValueChangedEventArgs>(picker_ValueChanged);
+           
 
-            string planid;
+            plan = GetSeletcedPlan();
+
             
 
+            bookService = BookService.getInstance();
+            
+            List<string> pl = new List<string>() { "高", "中", "低" };
+            this.prioritylist.ItemsSource = pl;
+
+            this.prioritylist.SelectedItem = plan.Priority;
+
+            this.bookname.Text = plan.Title;
+            //this.bookname.IsEnabled = false;
+            this.bookname.IsReadOnly = true;
+            this.bookname.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+
+            if (flag)
+            {
+                this.datePicker.Value = DateTime.Parse(plan.DatePicker);
+                this.timepicker.Value = DateTime.Parse(plan.RingTime);
+                flag = false;
+            }
+            
+
+            this.detail.Text = plan.Detail;
+
+            this.toggle.IsChecked = plan.IsReminder;
+
+            isRemind = plan.IsReminder;
+
+           
+            
+        }
+
+        private ReadingPlan GetSeletcedPlan()
+        {
+            string planid;
+            ReadingPlan selectedplan = null;
             if (NavigationContext.QueryString.TryGetValue("planID", out planid))
             {
                 dbPath = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "jadeface.sqlite"));
@@ -56,8 +97,8 @@ namespace jadeface
                 List<ReadingPlan> plans = command.ExecuteQuery<ReadingPlan>();
                 if (plans.Count == 1)
                 {
-                    plan = plans.First();
-                   
+                    selectedplan = plans.First();
+
                 }
             }
             else
@@ -66,53 +107,19 @@ namespace jadeface
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
 
-            bookService = BookService.getInstance();
-            
-            List<string> pl = new List<string>() { "高", "中", "低" };
-            this.prioritylist.ItemsSource = pl;
-            
-            this.prioritylist.SelectedItem = plan.Priority;
-
-            this.bookname.Text = plan.Title ;
-            //this.bookname.IsEnabled = false;
-            this.bookname.IsReadOnly = true;
-            this.bookname.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
-
-            //this.datePicker.Value = Convert.ToDateTime(plan.DatePicker);
-            //this.timepicker.Value = Convert.ToDateTime(plan.RingTime);
-
-            this.detail.Text = plan.Detail;
-
-            this.toggle.IsChecked = plan.IsReminder;
-
-            //string username = phoneAppServeice.State["username"].ToString();
-            //dbPath = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "jadeface.sqlite"));
-            //dbConn = new SQLiteConnection(dbPath);
-            //SQLiteCommand command = dbConn.CreateCommand("select * from booklistitem where userid = '" + username + "' and status = 1");
-            //List<BookListItem> books = command.ExecuteQuery<BookListItem>();
-
-            //Debug.WriteLine("[DEBUG]The count of book name list : " + books.Count);
-
-            //List<string> bookns = new List<string>();
-            //foreach (BookListItem book in books)
-            //{
-            //    bookns.Add(book.Title);
-            //}
-            //bl = books;
-            //this.booknamelist.ItemsSource = bookns;
-            
+            return selectedplan;
         }
-
 
         private void ApplicationBar_StateChanged(object sender, Microsoft.Phone.Shell.ApplicationBarStateChangedEventArgs e)
         {
         }
 
-        void picker_ValueChanged(object sender, DateTimeValueChangedEventArgs e)
-        {
-            DateTime date = (DateTime)e.NewDateTime;
-            MessageBox.Show(date.ToString("d"));
-        }
+        //void picker_ValueChanged(object sender, DateTimeValueChangedEventArgs e)
+        //{
+        //    DateTime date = (DateTime)e.NewDateTime;
+        //    //this.datePicker.Value = date;
+        //    MessageBox.Show(date.ToString("d"));
+        //}
 
 
         private void toggle_Click(object sender, RoutedEventArgs e)
@@ -151,10 +158,41 @@ namespace jadeface
             if (plan.IsReminder)
             {
                 plan.Image = "/Icon/feature.alarm.png";
+
+                string clockname = "alarm" + plan.ISBN;
+                if (isRemind)
+                {
+                    ScheduledActionService.Remove(clockname);
+                }
+                Alarm clock = new Alarm(clockname);
+                //开始时间
+                clock.BeginTime = (DateTime)this.timepicker.Value;
+                //结束时间
+                clock.ExpirationTime = clock.BeginTime + new TimeSpan(0, 0, 30);
+
+                //提醒内容
+                clock.Content = "别忘了今天要读<<" + plan.Title + ">>.";
+
+
+                //提醒铃声
+                clock.Sound = new Uri("/SleepAway.mp3", UriKind.Relative);
+
+                //提醒类型
+                clock.RecurrenceType = RecurrenceInterval.Daily;
+
+                ScheduledActionService.Add(clock);
+                
+
             }
             else
             {
                 plan.Image = "";
+
+                string clockname = "alarm" + plan.ISBN;
+                if (isRemind)
+                {
+                    ScheduledActionService.Remove(clockname);
+                }
             }
 
             Debug.WriteLine("[DEBUG]plan.userid: " + plan.UserId + "plan.ISBN;" + plan.ISBN + "plan.title:" + plan.Title +

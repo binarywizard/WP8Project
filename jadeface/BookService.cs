@@ -320,5 +320,17 @@ namespace jadeface
 
             return false;
         }
+
+        public List<ReadingPlan> searchReadingPlanByISBN(string ISBN, string username)
+        {
+            if (username.Equals("") || username == null)
+            {
+                return null;
+            }
+            Debug.WriteLine("[DEBUG]Select SQL is : " + "select * from readingplan where isbn = '" + ISBN + "' and userid = '" + username + "'");
+            SQLiteCommand command = dbConn.CreateCommand("select * from readingplan where isbn = '" + ISBN + "' and userid = '" + username + "'");
+            List<ReadingPlan> items = command.ExecuteQuery<ReadingPlan>();
+            return items;
+        }
     }
 }

@@ -17,6 +17,7 @@ using Windows.Storage;
 using Microsoft.Phone.Net.NetworkInformation;
 using System.Diagnostics;
 using System.ComponentModel;
+using Microsoft.Phone.Scheduler;
 
 namespace jadeface
 {
@@ -493,7 +494,16 @@ namespace jadeface
 
             if (result == MessageBoxResult.OK)
             {
+                //删除计划
                 bookService.deletePlan(plan);
+                //删除闹钟
+
+                if (plan.IsReminder)
+                {
+                    string clockname = "alarm" + plan.ISBN;
+                    ScheduledActionService.Remove(clockname);
+                }
+
             }
 
             //RefreshWishBookList();

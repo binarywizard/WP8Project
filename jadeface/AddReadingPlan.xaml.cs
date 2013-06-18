@@ -12,6 +12,7 @@ using System.Diagnostics;
 using SQLite;
 using System.IO;
 using Windows.Storage;
+using Microsoft.Phone.Scheduler;
 
 namespace jadeface
 {
@@ -127,29 +128,60 @@ namespace jadeface
 
         private void save_clicked(object sender, EventArgs e)
         {
+            List<ReadingPlan> items = bookService.searchReadingPlanByISBN(bl[booknamelist.SelectedIndex].ISBN, phoneAppServeice.State["username"].ToString());
+            Debug.WriteLine("the count of items is :" + items.Count);
+            if (items.Count > 0)
+            {
+                MessageBox.Show("这本书已在计划列表，如需要修改，可以选择编辑按钮");
+                return;
+            }
             ReadingPlan plan = new ReadingPlan();
             plan.UserId = phoneAppServeice.State["username"].ToString();
             plan.ISBN = bl[booknamelist.SelectedIndex].ISBN;
 
             plan.Title = (string)this.booknamelist.SelectedItem;
             plan.DatePicker = this.datePicker.ValueString;
+            //plan.DatePicker = this.datePicker.Value.ToString();
             plan.Priority = (string)this.prioritylist.SelectedItem;
             plan.IsReminder = (bool)this.toggle.IsChecked;
             plan.RingTime = this.timepicker.ValueString;
+            //plan.RingTime = this.timepicker.Value.ToString();
             plan.Detail = this.detail.Text.ToString();
 
             if (plan.IsReminder)
             {
                 plan.Image = "/Icon/feature.alarm.png";
+                string clockname = "alarm" + plan.ISBN;
+                Alarm clock = new Alarm(clockname);
+                //开始时间
+                clock.BeginTime = (DateTime)this.timepicker.Value;
+                //结束时间
+                clock.ExpirationTime = clock.BeginTime + new TimeSpan(0, 0, 30);
+
+                //提醒内容
+                clock.Content = "别忘了今天要读<<" + plan.Title + ">>.";
+
+
+                //提醒铃声
+                clock.Sound = new Uri("/SleepAway.mp3", UriKind.Relative);
+
+                //提醒类型
+                clock.RecurrenceType = RecurrenceInterval.Daily;
+
+                ScheduledActionService.Add(clock);
+
+                Debug.WriteLine("[DEBUG]clock.BeginTime: " + clock.BeginTime + "  clock.ExpirationTime;" + clock.ExpirationTime + "  clock.Content:" + clock.Content +
+                "  clock.Sound:" + clock.Sound + "  clock.RecurrenceType;" + clock.RecurrenceType);
+
             }
             else
             {
                 plan.Image = "";
             }
 
-            Debug.WriteLine("[DEBUG]plan.userid: " + plan.UserId + "plan.ISBN;" + plan.ISBN + "plan.title:" + plan.Title +
-                "plan.dataPicker:" + plan.DatePicker + "plan.priority;" + plan.Priority + "plan.IsReminder:" + plan.IsReminder + "plan.ringtime:" + plan.RingTime
-                + "plan.Detail:" + plan.Detail);
+            Debug.WriteLine("[DEBUG]plan.userid: " + plan.UserId + "  plan.ISBN;" + plan.ISBN + "  plan.title:" + plan.Title +
+                "  plan.dataPicker:" + plan.DatePicker + "  plan.priority;" + plan.Priority + "  plan.IsReminder:" + plan.IsReminder + "  plan.ringtime:" + plan.RingTime
+                + "  plan.Detail:" + plan.Detail);
 
             bool result = bookService.insertPlan(plan);
             if (result)

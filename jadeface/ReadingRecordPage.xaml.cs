@@ -95,6 +95,9 @@ namespace jadeface
 
             readingProgressBar.DataContext = book;
             readingProgressBar.Value = book.HaveReadPage;
+
+            ProgressTextBlock.DataContext = book;
+            ProgressTextBlock.Text = ((double)book.HaveReadPage / book.PageNo * 100).ToString("f0") + "%";
             ReadingRecordHistory.ItemsSource = records;
         }
 

@@ -22,12 +22,12 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel 包含应用程序的名称和页标题-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,20">
-            <TextBlock Text="添加读书计划" Foreground="Black" Style="{StaticResource PhoneTextTitle2Style}"/>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="添加读书计划" Foreground="Black" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - 在此处放置其他内容-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,-10,12,0">
             <StackPanel>
                 <!--<TextBox x:Name="bookname"   Text="书名" Foreground="#FF858282" GotFocus="TextBox_GotFocus"/>-->
                 <toolkit:ListPicker x:Name="booknamelist" Header="书名" Foreground="Black" BorderBrush="#FFCCCC99"
@@ -56,7 +56,7 @@
                 </toolkit:ListPicker>
                 
                 <toolkit:ToggleSwitch x:Name="toggle" Content="开" IsChecked="true" Header="提醒" Click="toggle_Click"
-                                     Foreground="Black">
+                                     Foreground="Black" >
                     <toolkit:ToggleSwitch.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Foreground="Black" Text="提醒" />

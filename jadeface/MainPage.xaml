@@ -114,7 +114,7 @@
                                                     </Image>
                                                     
                                                 </StackPanel>-->
-                                                    <StackPanel Orientation="Vertical"  Height="126" Width="280" Margin="12, 0">
+                                                    <StackPanel Orientation="Vertical"  Height="100" Width="320" Margin="12, 0">
                                                         <StackPanel Orientation="Vertical">
                                                             <TextBlock Name="PlanTitle" Foreground="Black" FontSize="32" Text="{Binding Title}" Margin="10,5"></TextBlock>
                                                             <StackPanel Orientation="Horizontal">
@@ -130,7 +130,7 @@
                                                         <TextBlock Text="页" FontSize="16" ></TextBlock>-->
                                                         </StackPanel>
                                                     </StackPanel>
-                                                    <StackPanel Width="100" HorizontalAlignment="Right">
+                                                    <StackPanel Width="70" HorizontalAlignment="Right">
                                                         <Image HorizontalAlignment="Right" x:Name="clock">
                                                             <Image.Source>
                                                                 <BitmapImage CreateOptions="DelayCreation,IgnoreImageCache" UriSource="{Binding Image}" />
@@ -274,13 +274,13 @@
         <shell:ApplicationBar x:Key="AppBar1" x:Name="ReadingPageApplicationBar"
             IsVisible="True" IsMenuEnabled="True" Opacity="0.5"
             StateChanged="ApplicationBar_StateChanged">
-            <shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>
+            <!--<shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>
             <shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加书籍" Click="ApplicationBarIconButton_Click_Add"/>
-            <shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>
+            <shell:ApplicationBarIconButton IconUri="icon\feature.search.png" Text="搜索" Click="ApplicationBarIconButton_Click_Search"/>-->
             <shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click_Setting"/>
-                <shell:ApplicationBarMenuItem Text="检查更新" Click="ApplicationBarMenuItem_Click_Update"/>
+                <!--<shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click_Setting"/>
+                <shell:ApplicationBarMenuItem Text="检查更新" Click="ApplicationBarMenuItem_Click_Update"/>-->
                 <shell:ApplicationBarMenuItem Text="关于" Click="ApplicationBarMenuItem_Click_About"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

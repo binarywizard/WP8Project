@@ -74,9 +74,9 @@
             <!--RecordPanel is used to record pages which user reads in this day-->
             <StackPanel Name="ReadingRecordPanel" Grid.Row="1" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="今天读了：" Foreground="Black" FontSize="{StaticResource PhoneFontSizeMediumLarge}"
-                           VerticalAlignment="Center" Margin="0, 10" />
-                    <Button Content="读完了" Name="finishButton" Foreground="Black" Margin="181, 0, 0, 0" Click="FinishRead_Click"
+                    <TextBlock Text="今天读了：" Foreground="Black" FontSize="{StaticResource PhoneFontSizeLarge}"
+                            VerticalAlignment="Center" Margin="0, 10" />
+                    <Button Content="读完了" Name="finishButton" Foreground="Black" Margin="149, 0, 0, 0" Click="FinishRead_Click"
                             Width="120" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -103,13 +103,14 @@
             
             <!--This panel shows the progress you have read-->
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                <ProgressBar Name="readingProgressBar" IsIndeterminate="False" Foreground="Green" Background="Red" 
+                <ProgressBar Name="readingProgressBar" IsIndeterminate="False" Foreground="Green" Background="Red" Style="{StaticResource ProgressBarStyle1}"
                              Height="30" Width="400" Value="{Binding HaveReadPage}" Minimum="0" Maximum="{Binding PageNo}" />
+                <TextBlock Name="ProgressTextBlock" Foreground="Black" Text="0%" />
             </StackPanel>
 
             <!--The history of reading record-->
-            <StackPanel Grid.Row="4" Orientation="Vertical">
-                <TextBlock Text="历史记录:" Foreground="Black" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
+            <StackPanel Grid.Row="4" Orientation="Vertical" Margin="0, 10">
+                <TextBlock Text="历史记录:" Foreground="Black" FontSize="{StaticResource PhoneFontSizeLarge}" />
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <toolkit:GestureService.GestureListener>
                         <toolkit:GestureListener DragStarted="RecordHistoryDrag" DragCompleted="RecordHistoryDragCompleted" />
