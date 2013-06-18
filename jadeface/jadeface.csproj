@@ -109,10 +109,10 @@
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Note.cs" />
     <Compile Include="NotesPage.xaml.cs">
       <DependentUpon>NotesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ReadingNote.cs" />
     <Compile Include="ReadingPlan.cs" />
     <Compile Include="ReadingRecord.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -219,6 +219,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
+    <Content Include="Assets\analysis_button_130.jpg" />
+    <Content Include="Assets\analysis_button_172.jpg" />
+    <Content Include="Assets\analysis_button_220.jpg" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

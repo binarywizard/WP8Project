@@ -1,11 +1,13 @@
 ﻿<phone:PhoneApplicationPage
     x:Class="jadeface.NotesPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+   
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -29,30 +31,42 @@
         <!--ContentPanel - 在此处放置其他内容-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="Black" TextWrapping="Wrap">
-                    </TextBlock>
-                    <TextBlock Foreground="Black" TextWrapping="Wrap" TextAlignment="Center">
-                        测试书名
-                    </TextBlock>
-                </StackPanel>
-                <StackPanel>
-                    <TextBlock Foreground="Black" TextWrapping="Wrap">
-                        2012-01-01 13:00:00
-                    </TextBlock>
-                    <TextBlock Foreground="Black" TextWrapping="Wrap">
-                        测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容
-                        测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容
-                        测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容
-                        测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容
-                    </TextBlock>
-                </StackPanel>
-                <TextBox Height="220">
+                <TextBox x:Name="notecontent"  Height="200" GotFocus="notecontent_GotFocus">
                     <TextBox.Text>
                         请把笔记内容输入到这里
                     </TextBox.Text>
                 </TextBox>
-                <Button Foreground="Black" Content="保存笔记" BorderBrush="Black"></Button>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="savenotebtn"  Foreground="Black" Content="保存笔记" BorderBrush="Black" HorizontalAlignment="Center" Margin="60,0,0,0" Click="savenotebtn_Click"></Button>
+                    <Button x:Name="clearnotebtn"  Foreground="Black" Content="清除笔记" BorderBrush="Black" HorizontalAlignment="Center" Click="clearnotebtn_Click"></Button>
+
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="bn" Foreground="Black" TextWrapping="Wrap" Margin="0,10,0,0" FontSize="24">
+                       
+                    </TextBlock>
+                    <TextBlock x:Name="bookname"  Foreground="Black" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0" FontSize="24">
+                       
+                    </TextBlock>
+                </StackPanel>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <phone:LongListSelector Name="NoteListItems" HorizontalContentAlignment="Center" Foreground="Black">
+
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Foreground="Black" TextWrapping="Wrap" Text="{Binding NoteTime}">
+                                    </TextBlock>
+                                    <TextBlock Foreground="Black" TextWrapping="Wrap" Text="{Binding NoteContent}">
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+                </ScrollViewer>
+
             </StackPanel>
            
     

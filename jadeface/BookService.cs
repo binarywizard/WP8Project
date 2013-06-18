@@ -29,6 +29,7 @@ namespace jadeface
             dbConn.CreateTable<BookListItem>();
             dbConn.CreateTable<ReadingRecord>();
             dbConn.CreateTable<ReadingPlan>();
+            dbConn.CreateTable<ReadingNote>();
         }
 
         public void destoryInstance()
@@ -297,7 +298,11 @@ namespace jadeface
             Debug.WriteLine("select * from readingrecord where userid='" + username + " '");
             SQLiteCommand command = dbConn.CreateCommand("select * from readingrecord where userid='" + username + "'");
             List<ReadingRecord> records = command.ExecuteQuery<ReadingRecord>();
-            
+
+            if (records.Count == 0)
+            {
+                return 0;
+            }
             string lastDay = records.Last().Timestamp;
             string firstDay = records.First().Timestamp;
             TimeSpan ts = DateTime.Parse(lastDay) - DateTime.Parse(firstDay);
@@ -331,6 +336,35 @@ namespace jadeface
             SQLiteCommand command = dbConn.CreateCommand("select * from readingplan where isbn = '" + ISBN + "' and userid = '" + username + "'");
             List<ReadingPlan> items = command.ExecuteQuery<ReadingPlan>();
             return items;
+        }
+
+        //读书笔记
+        public bool insertNote(ReadingNote plan)
+        {
+            if (plan.UserId == null || plan.ISBN == null || plan.UserId.Equals("") || plan.ISBN.Equals(""))
+            {
+                return false;
+            }
+
+            if (dbConn.Insert(plan) > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public List<ReadingNote> RefreshReadingNote(string username, string ISBN)
+        {
+            if (username.Equals("") || username == null)
+            {
+                return null;
+            }
+            Debug.WriteLine("[DEBUG]Refresh SQL is : " + "select * from readingnote where userid='" + username + "' and isbn='" + ISBN + "'");
+            SQLiteCommand command = dbConn.CreateCommand("select * from readingnote where userid='" + username + "' and isbn='" + ISBN + "'");
+            List<ReadingNote> notes = command.ExecuteQuery<ReadingNote>();
+            Debug.WriteLine("[DEBUG]notes.Count = " + notes.Count);
+            return notes;
         }
     }
 }

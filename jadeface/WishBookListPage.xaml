@@ -22,15 +22,15 @@
             <Grid x:Name="ListContentGrid" Margin="25,0,10,0" Height="600">
 
                 <!--<Button Grid.Row ="0" Grid.ColumnSpan="2" x:Name="ButtonRefresh" Click="ButtonRefresh_Click" Content="刷新我的书籍列表" Foreground="Black" Background="#FFCCCC99" BorderBrush="#FFCCCC99" Style="{StaticResource ButtonStyle}"/>-->
-                <phone:LongListSelector Name="WishBookListItems" HorizontalContentAlignment="Center" Foreground="Black">
+                <phone:LongListSelector Name="WishBookListItems" HorizontalContentAlignment="Center" Foreground="Black" Tap="SelectAWishBook">
                     <toolkit:GestureService.GestureListener>
                         <toolkit:GestureListener />
                     </toolkit:GestureService.GestureListener>
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="#FFCCCC99" BorderThickness="2">
-                                <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="120">
+                                
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="120" Margin="0,0,0,10">
                                         <StackPanel Height="126" Width="80" Margin="7, 10, 0, 0">
                                             <Image>
                                                 <Image.Source>
@@ -52,7 +52,15 @@
                                             </StackPanel>
                                         </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
+
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu>
+                                        <toolkit:MenuItem Header="决定开始读" Click="MenuItem_Click"/>
+                                        <toolkit:MenuItem Header="已经默默地读完了" Click="MenuItem_Click"/>
+                                        <toolkit:MenuItem Header="删除" Click="MenuItem_Click"/>
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+
                             </Border>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>

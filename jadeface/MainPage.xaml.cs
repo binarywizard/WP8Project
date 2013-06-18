@@ -22,7 +22,7 @@ using Microsoft.Phone.Scheduler;
 namespace jadeface
 {
 
-    public partial class WishBookList : PhoneApplicationPage
+    public partial class MainPage : PhoneApplicationPage
     {
         // MobileServiceCollectionView implements ICollectionView (useful for databinding to lists) and 
         // is integrated with your Mobile Service to make it easy to bind your data to the ListView
@@ -43,7 +43,7 @@ namespace jadeface
         RobusterProgressBar robusterProgressBar = new RobusterProgressBar();
 
         // Constructor
-        public WishBookList()
+        public MainPage()
         {
             InitializeComponent();
         }
@@ -452,13 +452,6 @@ namespace jadeface
             NavigationService.Navigate(new Uri("/WishBookListPage.xaml", UriKind.Relative));
         }
 
-        private void SelectABook(Object sender, SelectionChangedEventArgs e)
-        {
-            var books = (LongListSelector)sender;
-            BookListItem book = books.SelectedItem as BookListItem;
-            NavigationService.Navigate(new Uri("/ReadingRecordPage.xaml?BookISBN=" + book.ISBN, UriKind.Relative));
-        }
-
         private void BookListDrag(object sender, GestureEventArgs e)
         {
             ApplicationBar.IsVisible = false;
@@ -527,6 +520,20 @@ namespace jadeface
             Debug.WriteLine("the ISBN is:" + isbn);
             NavigationService.Navigate(new Uri("/BookDetailPage.xaml?BookISBN=" + plan.ISBN, UriKind.Relative));
         }
+
+        private void SelectABook(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var books = (LongListSelector)sender;
+            BookListItem book = books.SelectedItem as BookListItem;
+            if (book == null)
+            {
+                return;
+            }
+            Debug.WriteLine("[DEBUG]ISBN is " + book.ISBN);
+            NavigationService.Navigate(new Uri("/ReadingRecordPage.xaml?BookISBN=" + book.ISBN, UriKind.Relative));
+        }
+
+        
 
     }
 
