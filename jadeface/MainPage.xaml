@@ -53,7 +53,17 @@
                                             </StackPanel>
                                         </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
+
+                                        <toolkit:ContextMenuService.ContextMenu>
+                                            <toolkit:ContextMenu>
+                                                <toolkit:MenuItem Header="以后再读吧" Click="MenuItem_Click"/>
+                                                <toolkit:MenuItem Header="已经默默地读完了" Click="MenuItem_Click"/>
+                                                <toolkit:MenuItem Header="删除" Click="MenuItem_Click"/>
+                                            </toolkit:ContextMenu>
+                                        </toolkit:ContextMenuService.ContextMenu>
+                                    
+                                    </StackPanel>
+                                
                                 <StackPanel VerticalAlignment="Top">
                                     <local:RobusterProgressBar Maximum="{Binding PageNo}"  Minimum="0" Value="{Binding HaveReadPage}" HorizontalAlignment="Right"
                                                                Foreground="Green" Background="Red" Height="10" Width="350" Margin="0,0,-5,10" />

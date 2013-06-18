@@ -43,12 +43,6 @@
                                             <TextBlock Name="BookSearchAuthor" Foreground="Black" FontSize="16" Text="{Binding Author}" Margin="10,5" ></TextBlock>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Name="BookSearchMarking" Foreground="Black" FontSize="16" Text="{Binding Marking}" Margin="10,5" ></TextBlock>
-                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="220,0,0,0">
-                                                    <TextBlock Name="HaveReadPage" Text="{Binding HaveReadPage}" FontSize="16" HorizontalAlignment="Right"></TextBlock>
-                                                    <TextBlock Text="/" FontSize="16" ></TextBlock >
-                                                    <TextBlock Name="PageNo" Text="{Binding PageNo}" FontSize="16" HorizontalAlignment="Left"></TextBlock>
-                                                    <TextBlock Text="页" FontSize="16" ></TextBlock>
-                                                </StackPanel>
                                             </StackPanel>
                                         </StackPanel>
                                     </StackPanel>

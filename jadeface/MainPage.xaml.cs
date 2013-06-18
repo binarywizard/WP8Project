@@ -533,6 +533,44 @@ namespace jadeface
             NavigationService.Navigate(new Uri("/ReadingRecordPage.xaml?BookISBN=" + book.ISBN, UriKind.Relative));
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            //获取选中的menuItem对象
+            MenuItem menuItem = (MenuItem)sender;
+            //获取对象的标题头的内容 
+            string header = (sender as MenuItem).Header.ToString();
+            //获取选中的LonglistSelectorItem
+            BookListItem book = this.BookListItems.SelectedItem as BookListItem;
+
+            //如果没有选中则返回
+            if (book == null)
+            {
+                return;
+            }
+            Debug.WriteLine("[DEBUG]Book is : " + book.Title);
+            Debug.WriteLine("[DEBUG]Book Status is : " + book.Status);
+
+            if (menuItem.Header.ToString() == "以后再读吧")
+            {
+                book.Status = BookStatus.WISH;
+                Debug.WriteLine("[DEBUG]Book Status is : " + book.Status);
+                bookService.update(book);
+                RefreshBookList();
+            }
+            else if (menuItem.Header.ToString() == "已经默默地读完了")
+            {
+                book.Status = BookStatus.FINISHED;
+                bookService.update(book);
+                RefreshBookList();
+            }
+            else if (menuItem.Header.ToString() == "删除")
+            {
+                //只删除书籍信息，不删除书籍相关的记录等
+                bookService.delete(book, phoneAppServeice.State["username"].ToString());
+                RefreshBookList();
+            }
+        }
+
         
 
     }
