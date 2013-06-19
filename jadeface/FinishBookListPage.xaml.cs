@@ -115,7 +115,8 @@ namespace jadeface
             //获取对象的标题头的内容 
             string header = (sender as MenuItem).Header.ToString();
             //获取选中的LonglistSelectorItem
-            BookListItem book = this.FinishBookListItems.SelectedItem as BookListItem;
+            //BookListItem book = this.FinishBookListItems.SelectedItem as BookListItem;
+            BookListItem book = (BookListItem)menuItem.DataContext;
 
             //如果没有选中则返回
             if (book == null)
@@ -155,7 +156,7 @@ namespace jadeface
                 return;
             }
 
-            //(sender as LongListSelector).SelectedItem = null;
+            (sender as LongListSelector).SelectedItem = null;
 
             NavigationService.Navigate(new Uri("/BookDetailPage.xaml?BookISBN=" + book.ISBN, UriKind.Relative));
         }

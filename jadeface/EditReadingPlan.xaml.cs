@@ -165,22 +165,34 @@ namespace jadeface
 
                 if (isRemind)
                 {
-                    ScheduledActionService.Remove(clockname);
+                    if (ScheduledActionService.Find(clockname) != null)
+                        ScheduledActionService.Remove(clockname);
                 }
                 Alarm clock = new Alarm(clockname);
                 //开始时间(注意考虑开始时间小于系统时间的情况)
                 DateTime beginTime = (DateTime)this.timepicker.Value;
+                TimeSpan timespan = beginTime.TimeOfDay;
                 if (beginTime < DateTime.Now)
                 {
                     DateTime date = DateTime.Now.AddDays(1).Date;
-                    TimeSpan timespan = beginTime.TimeOfDay;
+
                     beginTime = date + timespan;
 
                     Debug.WriteLine("[Debug]date:" + date + "timespan" + timespan + "beginTime.TimeOfDay" + beginTime);
                 }
                 clock.BeginTime = beginTime;
                 //结束时间
-                clock.ExpirationTime = clock.BeginTime + new TimeSpan(0, 0, 30);
+                //clock.ExpirationTime = clock.BeginTime + new TimeSpan(0, 0, 30);
+
+                DateTime expirationtime = (DateTime)this.datePicker.Value + timespan;
+                Debug.WriteLine("[Debug]expirationtime:" + expirationtime);
+
+                if (expirationtime < beginTime)
+                {
+                    MessageBox.Show("截止提醒时间已过，请修改截止时间或提醒时间");
+                    return;
+                }
+                clock.ExpirationTime = expirationtime;
 
                 //提醒内容
                 clock.Content = "别忘了今天要读<<" + plan.Title + ">>.";
@@ -203,7 +215,8 @@ namespace jadeface
                 string clockname = "alarm" + plan.ISBN;
                 if (isRemind)
                 {
-                    ScheduledActionService.Remove(clockname);
+                    if (ScheduledActionService.Find(clockname) != null)
+                        ScheduledActionService.Remove(clockname);
                 }
             }
 

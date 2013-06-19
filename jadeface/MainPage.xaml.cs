@@ -497,7 +497,8 @@ namespace jadeface
                 if (plan.IsReminder)
                 {
                     string clockname = "alarm" + plan.ISBN;
-                    ScheduledActionService.Remove(clockname);
+                    if (ScheduledActionService.Find(clockname) != null)
+                        ScheduledActionService.Remove(clockname);
                 }
 
             }
@@ -533,7 +534,7 @@ namespace jadeface
                 return;
             }
 
-            //(sender as LongListSelector).SelectedItem = null;
+            (sender as LongListSelector).SelectedItem = null;
 
             Debug.WriteLine("[DEBUG]ISBN is " + book.ISBN);
             NavigationService.Navigate(new Uri("/ReadingRecordPage.xaml?BookISBN=" + book.ISBN, UriKind.Relative));
@@ -546,7 +547,8 @@ namespace jadeface
             //获取对象的标题头的内容 
             string header = (sender as MenuItem).Header.ToString();
             //获取选中的LonglistSelectorItem
-            BookListItem book = this.BookListItems.SelectedItem as BookListItem;
+            //BookListItem book = this.BookListItems.SelectedItem as BookListItem;
+            BookListItem book = (BookListItem)menuItem.DataContext;
 
             //如果没有选中则返回
             if (book == null)
