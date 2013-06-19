@@ -90,6 +90,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddReadingPlan.xaml.cs">
       <DependentUpon>AddReadingPlan.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,9 @@
     <Compile Include="BookService.cs" />
     <Compile Include="EditReadingPlan.xaml.cs">
       <DependentUpon>EditReadingPlan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FinishBookListPage.xaml.cs">
+      <DependentUpon>FinishBookListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -148,6 +154,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="About.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="AddReadingPlan.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -159,6 +169,10 @@
     <Page Include="EditReadingPlan.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FinishBookListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -245,6 +259,7 @@
     <Content Include="Icon\add.png" />
     <Content Include="Icon\appbar.edittext.rest.png" />
     <Content Include="Icon\back.png" />
+    <Content Include="Icon\bookicon.png" />
     <Content Include="Icon\cancel.png" />
     <Content Include="Icon\check.png" />
     <Content Include="Icon\close.png" />

@@ -6,7 +6,7 @@
         <Setter Property="Background" Value="{StaticResource PhoneTextBoxBrush}"/>
         <Setter Property="BorderBrush" Value="#FFCCCC99"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <!--<Setter Property="ValueStringFormat" Value="{}{0:d}"/>-->
+        <Setter Property="ValueStringFormat" Value="{}{0:t}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="toolkit:TimePicker">

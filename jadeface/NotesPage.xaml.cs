@@ -101,12 +101,13 @@ namespace jadeface
 
             if (result)
             {
-                MessageBox.Show("Succeed!");
+                MessageBox.Show("保存成功");
+                this.notecontent.Text = "";
                 showNoteList();
             }
             else
             {
-                MessageBox.Show("Failed!");
+                MessageBox.Show("保存失败");
             }
 
 

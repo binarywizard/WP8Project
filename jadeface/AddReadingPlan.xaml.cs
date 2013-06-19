@@ -159,7 +159,16 @@ namespace jadeface
                     string clockname = "alarm" + plan.ISBN;
                     Alarm clock = new Alarm(clockname);
                     //开始时间
-                    clock.BeginTime = (DateTime)this.timepicker.Value;
+                    DateTime beginTime = (DateTime)this.timepicker.Value;
+                    if (beginTime < DateTime.Now)
+                    {
+                        DateTime date = DateTime.Now.AddDays(1).Date;
+                        TimeSpan timespan = beginTime.TimeOfDay;
+                        beginTime = date + timespan;
+
+                        Debug.WriteLine("[Debug]date:" + date + "timespan" + timespan + "beginTime.TimeOfDay" + beginTime);
+                    }
+                    clock.BeginTime = beginTime;
                     //结束时间
                     clock.ExpirationTime = clock.BeginTime + new TimeSpan(0, 0, 30);
 

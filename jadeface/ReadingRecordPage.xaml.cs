@@ -138,14 +138,7 @@ namespace jadeface
                     record.UserId = phoneAppServeice.State["username"].ToString();
                     record.Timestamp = DateTime.Now.ToString();
                     bookService.insertRecord(record);
-                    record = null;
-
-                    //if (EndPageNo == book.PageNo)
-                    //{
-                    //    book.Status = BookStatus.FINISHED;
-                    //    bookService.update(book);
-                    //    MessageBox.Show("又读完了一本书！");
-                    //}
+                    record = null;  
                 }
                 else if (StartPageNo > EndPageNo)
                 {
@@ -164,6 +157,7 @@ namespace jadeface
             StartPage.Text = "";
             EndPage.Text = "";
             RefreshReadingRecord();
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 
         private List<Point> GetHaveReadPage(List<ReadingRecord> records)
@@ -231,9 +225,7 @@ namespace jadeface
             book.Status = BookStatus.FINISHED;
             bookService.update(book);
             MessageBox.Show("又读完了一本书！");
-            //RefreshWishBookList();
-            //RefreshBookList();
-            //RefreshFinishBookList();
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 
 

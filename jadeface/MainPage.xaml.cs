@@ -60,6 +60,8 @@ namespace jadeface
                     ApplicationBar = (ApplicationBar)Resources["AppBar2"];
                     break;
                 case 2:
+                    ApplicationBar = (ApplicationBar)Resources["AppBar3"];
+                    
                     string username = phoneAppServeice.State["username"].ToString();
 
                     int readingBookNo = bookService.getReadingBookNo(username);
@@ -73,7 +75,7 @@ namespace jadeface
 
                     int haveReadDays = bookService.getHaveReadDays(username);
                     HaveReadDaysText.Text = haveReadDays.ToString();
-                    break;
+                    break;  
             }
         }
 
@@ -441,6 +443,7 @@ namespace jadeface
 
         private void ApplicationBarMenuItem_Click_About(object sender, EventArgs e)
         {
+            NavigationService.Navigate(new Uri("/About.xaml", UriKind.Relative));
         }
 
         private void ApplicationBar_StateChanged(object sender, Microsoft.Phone.Shell.ApplicationBarStateChangedEventArgs e)
@@ -529,6 +532,9 @@ namespace jadeface
             {
                 return;
             }
+
+            //(sender as LongListSelector).SelectedItem = null;
+
             Debug.WriteLine("[DEBUG]ISBN is " + book.ISBN);
             NavigationService.Navigate(new Uri("/ReadingRecordPage.xaml?BookISBN=" + book.ISBN, UriKind.Relative));
         }
@@ -571,7 +577,10 @@ namespace jadeface
             }
         }
 
-        
+        private void ApplicationBarIconButton_Click_SearchFinish(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/FinishBookListPage.xaml", UriKind.Relative));
+        }
 
     }
 

@@ -148,7 +148,7 @@ namespace jadeface
 
         private void save_clicked(object sender, EventArgs e)
         {
-  
+
             plan.DatePicker = this.datePicker.ValueString;
             plan.Priority = (string)this.prioritylist.SelectedItem;
             plan.IsReminder = (bool)this.toggle.IsChecked;
@@ -160,13 +160,25 @@ namespace jadeface
                 plan.Image = "/Icon/feature.alarm.png";
 
                 string clockname = "alarm" + plan.ISBN;
+                //IEnumerable <Alarm> list = ScheduledActionService.GetActions<Alarm>();
+
+
                 if (isRemind)
                 {
                     ScheduledActionService.Remove(clockname);
                 }
                 Alarm clock = new Alarm(clockname);
-                //开始时间
-                clock.BeginTime = (DateTime)this.timepicker.Value;
+                //开始时间(注意考虑开始时间小于系统时间的情况)
+                DateTime beginTime = (DateTime)this.timepicker.Value;
+                if (beginTime < DateTime.Now)
+                {
+                    DateTime date = DateTime.Now.AddDays(1).Date;
+                    TimeSpan timespan = beginTime.TimeOfDay;
+                    beginTime = date + timespan;
+
+                    Debug.WriteLine("[Debug]date:" + date + "timespan" + timespan + "beginTime.TimeOfDay" + beginTime);
+                }
+                clock.BeginTime = beginTime;
                 //结束时间
                 clock.ExpirationTime = clock.BeginTime + new TimeSpan(0, 0, 30);
 
@@ -181,7 +193,7 @@ namespace jadeface
                 clock.RecurrenceType = RecurrenceInterval.Daily;
 
                 ScheduledActionService.Add(clock);
-                
+
 
             }
             else

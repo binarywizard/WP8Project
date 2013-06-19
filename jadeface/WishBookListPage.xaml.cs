@@ -217,6 +217,9 @@ namespace jadeface
             {
                 return;
             }
+
+            //(sender as LongListSelector).SelectedItem = null;
+
             NavigationService.Navigate(new Uri("/BookDetailPage.xaml?BookISBN=" + book.ISBN, UriKind.Relative));
         }
 
