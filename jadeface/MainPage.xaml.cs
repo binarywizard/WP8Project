@@ -76,6 +76,9 @@ namespace jadeface
                     int haveReadDays = bookService.getHaveReadDays(username);
                     HaveReadDaysText.Text = haveReadDays.ToString();
                     break;  
+                case 3:
+                    ApplicationBar = (ApplicationBar)Resources["AppBar4"];
+                    break;
             }
         }
 

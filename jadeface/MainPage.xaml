@@ -337,5 +337,19 @@
             <shell:ApplicationBarMenuItem Text="关于" Click="ApplicationBarMenuItem_Click_About"/>
         </shell:ApplicationBar.MenuItems>-->
         </shell:ApplicationBar>
+
+        <shell:ApplicationBar x:Key="AppBar4" 
+            IsVisible="False" IsMenuEnabled="True" Opacity="0.5"
+            StateChanged="ApplicationBar_StateChanged">
+            <!--<shell:ApplicationBarIconButton IconUri="icon\feature.settings.png" Text="显示模式" Click="ApplicationBarIconButton_Click_Change"/>-->
+            <!--<shell:ApplicationBarIconButton IconUri="icon\add.png" Text="添加计划" Click="ApplicationBarIconButton_Click_AddPlan"/>-->
+            <!--<shell:ApplicationBarIconButton IconUri="icon\check.png" Text="已读完" Click="ApplicationBarIconButton_Click_SearchFinish"/>-->
+            <!--<shell:ApplicationBarIconButton IconUri="icon\refresh.png" Text="刷新" Click="ApplicationBarIconButton_Click_Refresh"/>-->
+            <!--<shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click_Setting"/>
+            <shell:ApplicationBarMenuItem Text="检查更新" Click="ApplicationBarMenuItem_Click_Update"/>
+            <shell:ApplicationBarMenuItem Text="关于" Click="ApplicationBarMenuItem_Click_About"/>
+        </shell:ApplicationBar.MenuItems>-->
+        </shell:ApplicationBar>
     </phone:PhoneApplicationPage.Resources>
 </phone:PhoneApplicationPage>
